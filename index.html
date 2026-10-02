@@ -151,6 +151,16 @@ a{color:inherit}
 .ladder li:not(.h) b{color:var(--gold)}
 .ladder span{color:var(--muted)}
 
+/* thread */
+.thread{border-top:1px solid var(--rule);padding-top:6px}
+.msg{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rule2)}
+.msg i{width:10px;height:10px;border-radius:50%;background:var(--gold2);margin-top:7px}
+.msg.h i{background:var(--slate)}
+.msg b{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:3px}
+.msg.h b{color:var(--slate)}
+.msg p{font-size:clamp(15px,1.15vw,17.5px);color:var(--ink);line-height:1.4;max-width:52ch}
+.msg span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-top:4px}
+
 /* graph */
 .graphwrap{position:relative;height:min(62vh,640px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:linear-gradient(180deg,rgba(235,228,214,0),rgba(235,228,214,.6));margin-top:clamp(14px,2.5vh,26px)}
 #graph{width:100%;height:100%;cursor:grab;touch-action:none}
@@ -315,8 +325,9 @@ body.on-city .chrome,body.on-city .progress,body.on-city .counter{opacity:0;tran
   <div class="prod">
     <div class="copy">
       <div class="mono cap">A design studio</div>
-      <h2>One AI teammate per department. One shared memory.</h2>
+      <h2>A chief of staff, one AI teammate per department, one shared memory.</h2>
       <ul class="ladder">
+        <li class="fr"><b>The chief of staff runs the day</b><span>reads the memory, assigns work, chases what is late</span></li>
         <li class="fr"><b>AI does the legwork</b><span>research, drafts, first versions, follow-ups</span></li>
         <li class="h fr"><b>People give judgment</b><span>taste and approval at fixed gates</span></li>
         <li class="fr"><b>Every correction teaches</b><span>the agent learns that person's taste</span></li>
@@ -327,7 +338,30 @@ body.on-city .chrome,body.on-city .progress,body.on-city .counter{opacity:0;tran
   </div>
 </section>
 
-<!-- 8 Second brain -->
+<!-- 8 Agents talking -->
+<section class="slide" data-stage="The work: a design studio" data-notes="This is what a working morning looks like inside the Agent OS. The chief of staff opens the thread, each department agent answers from the shared memory, and the draft goes to a human for taste and approval. Nothing leaves the building without a human yes.">
+  <div class="prod">
+    <div class="copy">
+      <div class="mono cap">A design studio</div>
+      <h2>A working morning, inside the OS.</h2>
+      <ul class="lines">
+        <li class="fr"><b>The chief of staff opens the thread</b><span>from a deadline it found in the memory</span></li>
+        <li class="fr"><b>Each department answers with what it has</b><span>case studies, a draft, the client's payment history</span></li>
+        <li class="fr"><b>A person gives the yes</b><span>taste and approval, then it goes out</span></li>
+      </ul>
+    </div>
+    <div class="thread" aria-label="Agents coordinating in a thread">
+      <div class="msg fr"><i></i><div><b>Chief of staff</b><p>The pitch for the Kolhapur hotel is due Friday. What do we have?</p></div><span>09:02</span></div>
+      <div class="msg fr"><i></i><div><b>Marketing agent</b><p>Three matching case studies in memory, all hospitality. Pulling them with the before and after photos.</p></div><span>09:02</span></div>
+      <div class="msg fr"><i></i><div><b>Sales agent</b><p>First draft of the proposal in fourteen minutes. Scope from the brief, rates from the rate library, their last two meetings as context.</p></div><span>09:03</span></div>
+      <div class="msg fr"><i></i><div><b>Finance agent</b><p>Their last three invoices cleared on time. No credit flag. Suggested payment terms attached.</p></div><span>09:03</span></div>
+      <div class="msg fr"><i></i><div><b>Chief of staff</b><p>Draft goes to the design lead at four for taste and approval. Nothing leaves without a human yes.</p></div><span>09:04</span></div>
+      <div class="msg h fr"><i></i><div><b>Design lead</b><p>Shorten the fee section and lead with the resort project. Approved.</p></div><span>16:10</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 Second brain -->
 <section class="slide" data-stage="The work: a design studio" data-notes="This is the second brain. Every client, project, person, meeting, proposal, invoice and lesson is a node. Every agent reads it before acting and writes to it after. Agents do not chat with each other; they share memory. Drag a node, hover to see what it connects to.">
   <div class="mono cap">A design studio</div>
   <h2 style="font-size:clamp(30px,3.4vw,52px);max-width:none">The second brain. <span class="muted" style="font-style:italic;font-weight:300">Every client, project, person, meeting, proposal and invoice is a node.</span></h2>
@@ -415,14 +449,14 @@ body.on-city .chrome,body.on-city .progress,body.on-city .counter{opacity:0;tran
       <div class="mono cap">An architecture practice</div>
       <h2>Three documents become one proposal, in minutes.</h2>
       <ul class="lines">
-        <li class="fr"><b>Profile, scope and estimate, drafted into one</b><span>room by room, with concept imagery</span></li>
+        <li class="fr"><b>Profile, scope and estimate, drafted into one</b><span>room by room, with concept images generated for each room</span></li>
         <li class="fr"><b>Edited by talking to it</b><span>"cut the master bedroom budget by 20 percent", and it does</span></li>
         <li class="fr"><b>Every version kept</b><span>an audit trail the practice can show for years</span></li>
       </ul>
     </div>
     <div class="stack">
-      <figure class="shot a"><img src="img/proposal-list.jpg" alt="The proposals list"><figcaption>All proposals</figcaption></figure>
-      <figure class="shot b"><img src="img/proposal-chat.jpg" alt="The chat editor on a proposal"><figcaption>Chat to edit</figcaption></figure>
+      <figure class="shot a"><img src="img/proposal-rooms.jpg" alt="Room concept images generated for a proposal"><figcaption>Room concepts, generated for this proposal</figcaption></figure>
+      <figure class="shot b"><img src="img/proposal-chat.jpg" alt="The proposal document with its chat editor"><figcaption>The proposal, with the chat editor</figcaption></figure>
     </div>
   </div>
 </section>
@@ -446,13 +480,19 @@ body.on-city .chrome,body.on-city .progress,body.on-city .counter{opacity:0;tran
   </div>
 </section>
 
-<!-- 15 Jarvis City -->
-<section class="slide s-city" data-stage="Our own company" data-notes="We run Jarvis Daily the same way. This is Jarvis City, our own operating system drawn as a town. Landmarks are departments, houses across the river are customers, boats are leads, carts on the road are real work moving. Agents run on a schedule on our own server, share one second brain, draft everything, and a human approves anything that goes out.">
-  <div class="bg"><img src="img/jarvis-city-dusk.jpg" alt="Jarvis City, the company drawn as a town"></div>
-  <div class="card">
-    <div class="mono cap">Our own company</div>
-    <h2>We run Jarvis Daily the same way.</h2>
-    <p>Landmarks are departments. Houses across the river are customers. Boats are leads. Every cart on the road is real work moving.</p>
+<!-- 16 Jarvis City -->
+<section class="slide" data-stage="Our own company" data-notes="We run Jarvis Daily the same way. This is Jarvis City, our own operating system drawn as a town. Landmarks are departments, houses across the river are customers, boats are leads, carts on the road are real work moving. Agents run on a schedule on our own server, share one second brain, draft everything, and a human approves anything that goes out.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">Our own company</div>
+      <h2>We run Jarvis Daily the same way.</h2>
+      <ul class="lines">
+        <li class="fr"><b>Landmarks are departments</b><span>lighthouse marketing, market hall sales, bank finance</span></li>
+        <li class="fr"><b>Houses across the river are customers, boats are leads</b><span>a lit window means work this week</span></li>
+        <li class="fr"><b>Every cart on the road is real work moving</b><span>agents on a schedule, one second brain, a human approves what goes out</span></li>
+      </ul>
+    </div>
+    <figure class="shot"><img src="img/jarvis-city-dusk.jpg" alt="Jarvis City, the company drawn as a town" style="object-position:center"><figcaption>Jarvis City, live view</figcaption></figure>
   </div>
 </section>
 
@@ -569,9 +609,10 @@ hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.hat'); 
   var deps = ['Projects', 'Marketing', 'Sales', 'Finance', 'Admin', 'People'];
   function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
   svg.appendChild(el('circle', {cx: cx, cy: cy, r: 58, 'class': 'hub'}));
-  svg.appendChild(el('circle', {cx: cx, cy: cy, r: 64, 'class': 'hub', 'stroke-dasharray': '2 4', 'opacity': .5}));
-  var t = el('text', {x: cx, y: cy - 3, 'text-anchor': 'middle'}); t.textContent = 'Shared'; svg.appendChild(t);
-  t = el('text', {x: cx, y: cy + 16, 'text-anchor': 'middle'}); t.textContent = 'memory'; svg.appendChild(t);
+  svg.appendChild(el('circle', {cx: cx, cy: cy, r: 70, 'class': 'hub', 'stroke-dasharray': '2 4', 'opacity': .6}));
+  var t = el('text', {x: cx, y: cy - 3, 'text-anchor': 'middle'}); t.textContent = 'Chief of'; svg.appendChild(t);
+  t = el('text', {x: cx, y: cy + 16, 'text-anchor': 'middle'}); t.textContent = 'staff'; svg.appendChild(t);
+  t = el('text', {x: cx, y: cy + 84, 'text-anchor': 'middle', 'class': 's'}); t.textContent = 'the ring is the shared memory'; svg.appendChild(t);
   deps.forEach(function(d, i){
     var a = -Math.PI / 2 + i * Math.PI * 2 / deps.length, x = cx + Math.cos(a) * R, y = cy + Math.sin(a) * R;
     var x1 = cx + Math.cos(a) * 66, y1 = cy + Math.sin(a) * 66, x2 = cx + Math.cos(a) * (R - 26), y2 = cy + Math.sin(a) * (R - 26);
@@ -637,7 +678,7 @@ hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.hat'); 
   cv.addEventListener('pointerdown', function(e){ var n = near(pt(e)); if (n){ drag = n; cv.setPointerCapture(e.pointerId); } });
   cv.addEventListener('pointerup', function(){ drag = null; }); cv.addEventListener('pointercancel', function(){ drag = null; });
   cv.addEventListener('pointerleave', function(){ hover = null; if (RM) draw(); });
-  hooks[7] = { enter: function(){ init(); cancelAnimationFrame(raf); if (RM){ for (var k = 0; k < 220; k++) step(); draw(); } else loop(); }, leave: function(){ cancelAnimationFrame(raf); } };
+  hooks[8] = { enter: function(){ init(); cancelAnimationFrame(raf); if (RM){ for (var k = 0; k < 220; k++) step(); draw(); } else loop(); }, leave: function(){ cancelAnimationFrame(raf); } };
 })();
 
 var rt = 0; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ if (hooks[cur] && hooks[cur].enter){ if (hooks[cur].leave) hooks[cur].leave(); hooks[cur].enter(); } }, 200); });
