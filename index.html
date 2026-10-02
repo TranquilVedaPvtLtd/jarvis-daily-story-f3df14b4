@@ -9,496 +9,456 @@
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0E1020; --bg2:#141838; --bg3:#1B2048;
-  --ink:#F3EEE2; --muted:#A9ACBC; --dim:#6E7288;
-  --gold:#C9A227; --gold2:#E6C96A; --cool:#8FA7D9; --sage:#9DC8A6; --rose:#D9A5A5; --lav:#C7B5E8; --teal:#8FD3D3;
-  --line:rgba(243,238,226,.14); --line2:rgba(243,238,226,.07);
-  --r:14px; --pad:clamp(22px,5vw,84px);
+  --paper:#F4EFE6; --paper2:#EBE4D6; --paper3:#E2DACA;
+  --ink:#17181C; --ink2:#2F3139; --muted:#5E616B; --faint:#8F929B;
+  --rule:rgba(23,24,28,.16); --rule2:rgba(23,24,28,.08);
+  --gold:#8E6E10; --gold2:#C9A227; --slate:#5B6A96;
   --ease:cubic-bezier(.2,.7,.2,1);
+  --gx:clamp(22px,5.5vw,96px); --gy:clamp(20px,5vh,56px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.5;overflow:hidden;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background:
-  radial-gradient(1200px 700px at 85% -10%, rgba(201,162,39,.10), transparent 60%),
-  radial-gradient(900px 600px at -10% 110%, rgba(143,167,217,.10), transparent 60%);}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.5;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>")}
 
-h1,h2,.serif{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.012em;line-height:1.06;font-variation-settings:"opsz" 96}
-h1{font-size:clamp(38px,6.2vw,92px);max-width:14ch}
-h2{font-size:clamp(28px,4vw,56px);max-width:19ch;margin-bottom:clamp(14px,2vw,26px)}
-em{font-style:italic;color:var(--gold2)}
-.lede{font-size:clamp(16px,1.4vw,21px);color:var(--muted);max-width:56ch;line-height:1.55}
-.small{font-size:14px;color:var(--muted)}
-.gold{color:var(--gold2)}
+.serif,h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:400;letter-spacing:-.015em;line-height:1.02;font-variation-settings:"opsz" 144}
+h1{font-size:clamp(44px,7.2vw,112px);max-width:12ch;text-wrap:balance}
+h2{font-size:clamp(34px,5vw,76px);max-width:14ch;text-wrap:balance}
+h3{font-size:clamp(22px,2.1vw,30px);letter-spacing:-.01em}
+em{font-style:italic;font-weight:300;color:var(--gold)}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(17px,1.35vw,21px);color:var(--ink2);max-width:46ch;line-height:1.5;text-wrap:pretty}
+.muted{color:var(--muted)}
 a{color:inherit}
 
 /* chrome */
-.chrome{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);pointer-events:none;font-size:13px;color:var(--muted)}
-.wordmark{font-family:'Fraunces',serif;font-size:19px;color:var(--ink);letter-spacing:.01em}
-.wordmark b{color:var(--gold);font-weight:500}
-.stage{letter-spacing:.02em;transition:opacity .3s}
-.progress{position:fixed;left:0;bottom:0;height:3px;width:100%;background:var(--line2);z-index:20}
-.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s var(--ease)}
-.counter{position:fixed;right:var(--pad);bottom:16px;font-size:13px;color:var(--dim);z-index:20;font-variant-numeric:tabular-nums}
-.hint{position:fixed;left:var(--pad);bottom:16px;font-size:13px;color:var(--dim);z-index:20;transition:opacity .4s}
-.hint kbd{font:inherit;border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--muted);margin:0 2px}
-.notes{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);width:min(880px,calc(100% - 2*var(--pad)));background:rgba(20,24,56,.92);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;z-index:30;font-size:15px;color:var(--ink);backdrop-filter:blur(10px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.notes b{color:var(--gold2);font-weight:500}
+.chrome{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:20px var(--gx);pointer-events:none}
+.wordmark{font-family:'Fraunces',serif;font-size:19px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;white-space:nowrap}
+.wordmark i{width:8px;height:8px;border-radius:50%;background:var(--gold2);display:inline-block}
+.stage{transition:opacity .3s}
+.progress{position:fixed;left:var(--gx);right:var(--gx);bottom:22px;height:1px;background:var(--rule);z-index:20}
+.progress i{display:block;height:100%;width:0;background:var(--ink);transition:width .5s var(--ease)}
+.counter{position:fixed;right:var(--gx);bottom:32px;z-index:20;font-variant-numeric:tabular-nums}
+.hint{position:fixed;left:var(--gx);bottom:32px;z-index:20;transition:opacity .4s}
+.hint kbd{font:inherit;border:1px solid var(--rule);border-radius:4px;padding:1px 6px;color:var(--ink2);margin:0 2px}
+.notes{position:fixed;left:50%;bottom:52px;transform:translateX(-50%);width:min(900px,calc(100% - 2*var(--gx)));background:var(--ink);color:var(--paper);border-radius:6px;padding:16px 20px;z-index:30;font-size:15px;line-height:1.5;box-shadow:0 24px 60px rgba(23,24,28,.3)}
+.notes b{color:var(--gold2);font-weight:500;margin-right:6px}
 
 /* slides */
 #deck{position:fixed;inset:0}
-.slide{position:absolute;inset:0;padding:calc(var(--pad) + 28px) var(--pad) calc(var(--pad) + 10px);display:grid;align-content:center;opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease),visibility 0s linear .55s}
-.slide.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .55s var(--ease),transform .55s var(--ease),visibility 0s}
-.slide.back{transform:translateY(-16px)}
-.fr{opacity:0;transform:translateY(10px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.slide{position:absolute;inset:0;padding:calc(var(--gy) + 52px) var(--gx) calc(var(--gy) + 36px);display:grid;align-content:center;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease),visibility 0s linear .6s}
+.slide.is-active{opacity:1;visibility:visible;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease),visibility 0s}
+.slide.back{transform:translateY(-14px)}
+.fr{opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .fr.on{opacity:1;transform:none}
-.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
-.two.rev{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
-.stack>*+*{margin-top:14px}
-.card{background:rgba(20,24,56,.55);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
-.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--muted)}
-.list{list-style:none}
-.list li{position:relative;padding-left:26px;margin:10px 0;color:var(--ink)}
-.list li::before{content:"";position:absolute;left:0;top:.62em;width:12px;height:1px;background:var(--gold)}
-.list li span{color:var(--muted)}
-.quiet{color:var(--muted)}
-canvas{display:block}
+.cap{margin-bottom:clamp(14px,2.2vh,24px)}
+
+/* statement slides */
+.s-statement{align-content:end}
+.s-statement .lede{margin-top:clamp(16px,2.4vh,28px)}
 
 /* cover */
-.cover{align-content:end}
-.cover h1{margin:18px 0 20px}
-.cover .meta{display:flex;gap:26px;flex-wrap:wrap;color:var(--muted);font-size:15px;margin-top:34px}
-.cover .meta span{border-top:1px solid var(--line);padding-top:10px}
-#stars,#stars2{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.cover{align-content:end;padding-bottom:calc(var(--gy) + 48px)}
+.cover .fan{position:absolute;right:calc(var(--gx) * .6);top:50%;width:46vw;max-width:760px;aspect-ratio:16/11;transform:translateY(-54%);pointer-events:none}
+.cover .fan .shot{position:absolute;width:74%;aspect-ratio:16/10;transform-origin:50% 100%}
+.cover .fan .shot.a{left:0;top:9%;transform:rotate(-7deg)}
+.cover .fan .shot.b{left:14%;top:0;transform:rotate(1deg);z-index:2}
+.cover .fan .shot.c{left:28%;top:12%;transform:rotate(8deg)}
+.cover .meta{display:flex;gap:28px;margin-top:clamp(20px,3vh,34px)}
+.cover h1{position:relative;z-index:3}
+.cover .lede{position:relative;z-index:3}
 
-/* pivot timeline */
-.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;margin-top:30px}
-.tl::before{content:"";position:absolute;left:0;right:0;top:11px;height:1px;background:var(--line)}
-.tl .t{padding-top:34px;position:relative}
-.tl .t::before{content:"";position:absolute;left:0;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
-.tl .t.now::before{background:var(--gold)}
-.tl .t .y{font-size:13px;color:var(--gold2);letter-spacing:.04em}
-.tl .t h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,2.2vw,32px);margin:6px 0 8px}
-.tl .t p{color:var(--muted);max-width:30ch}
+/* screenshots */
+.shot{position:relative;margin:0;background:var(--paper2);border:1px solid var(--rule);border-radius:5px;overflow:hidden;box-shadow:0 1px 0 rgba(23,24,28,.05),0 28px 56px -26px rgba(23,24,28,.45);aspect-ratio:16/10}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+.shot.tall img{object-position:top center}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:linear-gradient(0deg,rgba(23,24,28,.55),rgba(23,24,28,0));color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;opacity:0;transition:opacity .25s}
+.shot:hover figcaption{opacity:1}
+.is-active .shot{animation:rise .8s var(--ease) both}
+.is-active .stack .shot.b{animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cover.is-active .fan .shot{animation:none}
+.cover.is-active .fan{animation:fanin 1s var(--ease) both}
+@keyframes fanin{from{opacity:0;transform:translateY(-50%)}to{opacity:1;transform:translateY(-54%)}}
 
-/* what we do */
-.three{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto auto;gap:18px;margin-top:10px}
-.three .b{border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;background:rgba(20,24,56,.45);position:relative}
-.three .b:first-child{grid-row:span 2;background:linear-gradient(160deg,rgba(201,162,39,.16),rgba(20,24,56,.5))}
-.three .n{font-family:'Fraunces',serif;font-size:44px;color:var(--gold);line-height:1;margin-bottom:12px}
-.three h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(22px,2vw,30px);margin-bottom:8px}
-.three p{color:var(--muted);max-width:40ch}
+/* product layout */
+.prod{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,4.5vw,80px);align-items:center}
+.prod.big{grid-template-columns:minmax(0,3.6fr) minmax(0,8.4fr)}
+.prod .copy h2{font-size:clamp(30px,3vw,46px);max-width:16ch;margin-bottom:clamp(14px,2vh,22px)}
+.lines{list-style:none;margin-top:6px;border-top:1px solid var(--rule)}
+.lines li{padding:12px 0;border-bottom:1px solid var(--rule2);font-size:clamp(15px,1.15vw,17.5px);color:var(--ink2);line-height:1.4}
+.lines li b{font-weight:500;color:var(--ink)}
+.lines li span{display:block;color:var(--muted);font-size:.92em;margin-top:2px}
+.stack{position:relative;aspect-ratio:16/11.4}
+.stack .shot{position:absolute;width:76%}
+.stack .shot.a{left:0;top:0}
+.stack .shot.b{right:0;bottom:0;z-index:2}
 
-/* stepper */
-.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:34px;position:relative}
-.steps::before{content:"";position:absolute;left:14px;right:14px;top:14px;height:1px;background:var(--line)}
-.step{position:relative;padding-top:42px}
-.step i{position:absolute;left:0;top:0;width:29px;height:29px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-style:normal;font-size:13px;color:var(--gold2);background:var(--bg)}
-.step.on i{background:var(--gold);color:#1a1405;font-weight:600}
-.step h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(18px,1.6vw,24px);margin-bottom:6px}
-.step p{color:var(--muted);font-size:15px;line-height:1.45}
+/* pivot */
+.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,48px);margin-top:clamp(28px,5vh,56px);border-top:1px solid var(--rule)}
+.tl .t{padding-top:18px}
+.tl .t .k{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tl .t h3{font-size:clamp(26px,3vw,44px);margin:10px 0 8px}
+.tl .t.now h3{color:var(--gold)}
+.tl .t p{color:var(--ink2);max-width:28ch;font-size:16px}
 
-/* roles grid */
-.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
-.role{border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;min-height:112px;background:rgba(20,24,56,.4);transition:border-color .2s,background .2s,transform .2s}
-.role h3{font-weight:500;font-size:16px;margin-bottom:6px}
-.role p{font-size:14px;color:var(--muted);opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s}
-.role:hover,.role:focus-within{border-color:var(--gold);background:rgba(201,162,39,.08);transform:translateY(-2px)}
-.role:hover p,.role:focus-within p{opacity:1;transform:none}
-.role.lit p{opacity:1;transform:none}
+/* three */
+.three{margin-top:clamp(20px,3vh,36px);border-top:1px solid var(--rule)}
+.three .b{display:grid;grid-template-columns:clamp(64px,8vw,120px) minmax(0,1fr);gap:16px;align-items:baseline;padding:clamp(14px,2.2vh,24px) 0;border-bottom:1px solid var(--rule2)}
+.three .n{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(34px,4vw,60px);color:var(--gold);line-height:1}
+.three h3{font-size:clamp(24px,2.6vw,38px);margin-bottom:4px}
+.three p{color:var(--ink2);max-width:52ch;font-size:clamp(15px,1.15vw,17.5px)}
 
-/* work map */
-.map{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.tile{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:rgba(20,24,56,.4);display:grid;gap:6px}
-.tile .who{font-size:13px;color:var(--gold2)}
-.tile .what{font-family:'Fraunces',serif;font-size:clamp(18px,1.5vw,22px);line-height:1.2}
-.tile.deep{border-color:rgba(201,162,39,.5)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(24px,4vh,48px);border-top:1px solid var(--rule);padding-top:20px}
+.step .n{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(28px,3vw,44px);color:var(--gold);line-height:1;margin-bottom:12px}
+.step h3{font-size:clamp(18px,1.6vw,24px);margin-bottom:6px}
+.step p{font-size:14.5px;color:var(--muted);line-height:1.45}
 
-/* agent os */
-.os{position:relative;width:100%;aspect-ratio:1.25/1;max-height:62vh}
+/* hats */
+.hats{display:grid;grid-template-columns:repeat(4,1fr);column-gap:clamp(16px,2.5vw,40px);margin-top:clamp(18px,3vh,32px)}
+.hat{border-top:1px solid var(--rule);padding:14px 0 12px;min-height:clamp(96px,13vh,124px);cursor:default}
+.hat h3{font-size:clamp(20px,1.9vw,28px);transition:color .2s}
+.hat p{font-size:14px;color:var(--muted);margin-top:6px;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;max-width:30ch}
+.hat:hover h3,.hat.lit h3{color:var(--gold)}
+.hat:hover p,.hat.lit p{opacity:1;transform:none}
+
+/* index of work */
+.s-index h2{font-size:clamp(28px,3.6vw,54px);max-width:none}
+.index{margin-top:clamp(12px,2vh,24px);border-top:1px solid var(--rule)}
+.index .row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;padding:clamp(6px,1vh,11px) 0;border-bottom:1px solid var(--rule2);align-items:baseline}
+.index .who{font-family:'Fraunces',serif;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.01em}
+.index .what{color:var(--ink2);font-size:clamp(15px,1.15vw,17.5px)}
+.index .what i{font-style:normal;color:var(--faint);font-size:12px;margin-left:10px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase}
+
+/* agent os diagram */
+.os{position:relative;width:100%;aspect-ratio:1.2/1;max-height:62vh}
 .os svg{width:100%;height:100%;overflow:visible}
-.os text{font-family:'Instrument Sans',sans-serif;fill:var(--ink);font-size:13px}
-.os .hub{fill:rgba(201,162,39,.14);stroke:var(--gold);stroke-width:1.2}
-.os .dep{fill:rgba(20,24,56,.9);stroke:var(--line);stroke-width:1}
-.os .spoke{stroke:var(--line);stroke-width:1}
+.os text{font-family:'Fraunces',serif;fill:var(--ink);font-size:16px}
+.os text.s{font-family:'Instrument Sans',sans-serif;font-size:11.5px;fill:var(--muted)}
+.os .hub{fill:none;stroke:var(--ink);stroke-width:.8}
+.os .spoke{stroke:var(--rule);stroke-width:1}
 .os .pulse{fill:var(--gold2)}
-.os .human{fill:var(--cool)}
-.ladder{display:grid;gap:10px;margin-top:18px}
-.rung{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;font-size:15px}
-.rung b{font-weight:500;color:var(--gold2);white-space:nowrap}
-.rung.h b{color:var(--cool)}
-.rung span{color:var(--muted)}
+.os .human{fill:var(--slate)}
+.ladder{list-style:none;margin-top:12px;border-top:1px solid var(--rule)}
+.ladder li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--rule2);font-size:clamp(15px,1.15vw,17.5px)}
+.ladder b{font-weight:500;white-space:nowrap}
+.ladder li.h b{color:var(--slate)}
+.ladder li:not(.h) b{color:var(--gold)}
+.ladder span{color:var(--muted)}
 
 /* graph */
-.graphwrap{position:relative;height:min(64vh,620px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:rgba(20,24,56,.35)}
+.graphwrap{position:relative;height:min(62vh,640px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:linear-gradient(180deg,rgba(235,228,214,0),rgba(235,228,214,.6));margin-top:clamp(14px,2.5vh,26px)}
 #graph{width:100%;height:100%;cursor:grab;touch-action:none}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px}
-.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
-
-/* trading */
-.chartwrap{position:relative;height:min(50vh,440px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:rgba(20,24,56,.35)}
-#chart{width:100%;height:100%}
-.ready{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.ready span{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted)}
-.ready span.ok{border-color:rgba(157,200,166,.5);color:var(--sage)}
-.ready span.kill{border-color:rgba(217,165,165,.5);color:var(--rose)}
-
-/* planner */
-.planner{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:rgba(20,24,56,.45)}
-.planner label{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:14px;color:var(--muted);margin:14px 0 6px}
-.planner label output{color:var(--ink);font-variant-numeric:tabular-nums}
-.planner input[type=range]{width:100%;accent-color:var(--gold);height:22px;cursor:pointer}
-.planner .out{margin-top:20px;border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.planner .out b{display:block;font-family:'Fraunces',serif;font-weight:400;font-size:clamp(24px,2.4vw,36px);color:var(--gold2);font-variant-numeric:tabular-nums}
-.planner .out span{font-size:13px;color:var(--muted)}
-
-/* dials */
-.dials{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
-.dial{text-align:center}
-.dial svg{width:100%;max-width:150px;height:auto}
-.dial circle.track{fill:none;stroke:var(--line);stroke-width:7}
-.dial circle.val{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1.4s var(--ease)}
-.dial .num{font-family:'Fraunces',serif;font-size:32px;margin-top:-104px;margin-bottom:60px}
-.dial p{font-size:14px;color:var(--muted)}
-.findings{margin-top:16px}
-
-/* proposal engine */
-.docs{position:relative;height:300px}
-.doc{position:absolute;top:0;width:30%;height:200px;border:1px solid var(--line);border-radius:12px;background:rgba(20,24,56,.85);padding:16px;transition:transform .9s var(--ease),opacity .9s var(--ease);font-size:14px;color:var(--muted)}
-.doc b{display:block;color:var(--ink);font-weight:500;margin-bottom:8px}
-.doc i{display:block;height:6px;border-radius:3px;background:var(--line);margin:7px 0}
-.doc i:nth-child(3){width:80%}.doc i:nth-child(4){width:60%}.doc i:nth-child(5){width:70%}
-.doc.a{left:0}.doc.b{left:35%}.doc.c{left:70%}
-.docs.merged .doc.a{transform:translate(55%,30px) rotate(-3deg);opacity:.0}
-.docs.merged .doc.c{transform:translate(-55%,30px) rotate(3deg);opacity:.0}
-.docs.merged .doc.b{transform:translateY(20px) scale(1.12);border-color:var(--gold)}
-.docs.merged .doc.b b::after{content:" becomes one proposal";color:var(--gold2)}
-.bubble{position:absolute;left:35%;top:238px;width:32%;background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.45);border-radius:12px 12px 12px 4px;padding:10px 14px;font-size:14px}
-.bubble.r{left:auto;right:0;top:250px;width:28%;background:rgba(20,24,56,.9);border-color:var(--line);border-radius:12px 12px 4px 12px}
-
-/* more builds */
-.more{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-top:10px}
-.more .card h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(20px,1.8vw,26px);margin-bottom:8px}
-.timeline{list-style:none;margin-top:10px;position:relative;padding-left:18px}
-.timeline::before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--line)}
-.timeline li{position:relative;margin:9px 0;font-size:15px;color:var(--muted)}
-.timeline li::before{content:"";position:absolute;left:-18px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
-.timeline li b{color:var(--ink);font-weight:500}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
 
 /* city */
-.citywrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:20px;align-items:stretch}
-.city{position:relative;height:min(62vh,600px);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:radial-gradient(800px 500px at 50% 120%,rgba(143,167,217,.10),transparent 60%),rgba(20,24,56,.35)}
-.city svg{width:100%;height:100%}
-.city text{font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:500;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:rgba(14,16,32,.85);stroke-width:3px;stroke-linejoin:round}
-.feed{border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;background:rgba(20,24,56,.45);display:flex;flex-direction:column;min-height:0}
-.feed h3{font-weight:500;font-size:15px;margin-bottom:10px;color:var(--muted)}
-.feed ul{list-style:none;overflow:hidden;flex:1}
-.feed li{font-size:14px;padding:8px 0;border-top:1px solid var(--line2);display:grid;grid-template-columns:1fr auto;gap:10px;animation:feedin .4s var(--ease)}
-.feed li b{font-weight:500;color:var(--gold2);font-size:12px;white-space:nowrap}
-.feed li span{color:var(--muted)}
-@keyframes feedin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-.layers{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
-.layers i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.s-city{padding:0}
+body.on-city .chrome,body.on-city .progress,body.on-city .counter{opacity:0;transition:opacity .3s}
+.s-city .bg{position:absolute;inset:0}
+.s-city .bg img{width:100%;height:100%;object-fit:cover;object-position:center}
+.s-city .card{position:absolute;left:var(--gx);bottom:calc(var(--gy) + 40px);width:min(520px,calc(100% - 2*var(--gx)));background:var(--paper);padding:24px 26px 22px;border-radius:6px;box-shadow:0 30px 60px -20px rgba(23,24,28,.5)}
+.s-city .card h2{font-size:clamp(28px,2.8vw,40px);margin-bottom:10px}
+.s-city .card p{color:var(--ink2);font-size:16px}
 
 /* loop */
-.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:30px;position:relative}
-.loop .n{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:rgba(20,24,56,.4);position:relative}
-.loop .n::after{content:"";position:absolute;right:-9px;top:50%;width:6px;height:6px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);transform:translateY(-50%) rotate(45deg)}
+.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,2vw,28px);margin-top:clamp(24px,4vh,48px);border-top:1px solid var(--rule);padding-top:20px}
+.loop .n{position:relative}
+.loop .n::after{content:"";position:absolute;right:-14px;top:12px;width:8px;height:8px;border-top:1px solid var(--ink);border-right:1px solid var(--ink);transform:rotate(45deg)}
 .loop .n:last-child::after{display:none}
-.loop h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(18px,1.5vw,22px);margin-bottom:6px}
-.loop p{font-size:14px;color:var(--muted)}
-.loopback{margin-top:14px;font-size:14px;color:var(--gold2)}
+.loop h3{font-size:clamp(20px,2vw,30px);margin-bottom:6px}
+.loop p{font-size:14.5px;color:var(--muted)}
+.loopback{margin-top:22px;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(18px,1.6vw,24px);color:var(--gold)}
 
 /* direction */
-.ingr{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.ingr div{border-top:1px solid var(--gold);padding-top:14px}
-.ingr h3{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(20px,1.8vw,26px);margin-bottom:6px}
-.ingr p{color:var(--muted);font-size:15px}
+.ingr{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,48px);margin-top:clamp(24px,4vh,44px);border-top:1px solid var(--rule)}
+.ingr div{padding-top:16px}
+.ingr h3{font-size:clamp(22px,2.2vw,32px);margin-bottom:6px}
+.ingr p{color:var(--ink2);font-size:16px;max-width:30ch}
 
 /* close */
-.close .contact{display:grid;grid-template-columns:repeat(3,auto);gap:30px;margin-top:38px;font-size:16px;justify-content:start}
-.close .contact span{display:block;color:var(--muted);font-size:13px;margin-bottom:3px}
+.close{align-content:end}
+.close .contact{display:grid;grid-template-columns:repeat(3,auto);gap:40px;margin-top:clamp(24px,4vh,44px);justify-content:start;border-top:1px solid var(--rule);padding-top:18px}
+.close .contact span{display:block;margin-bottom:4px}
+.close .contact div{font-size:17px}
 
-@media (max-width:900px){
+@media (max-width:980px){
   body{font-size:15px}
-  .slide{padding:calc(var(--pad) + 40px) var(--pad) calc(var(--pad) + 26px);overflow-y:auto;align-content:start}
-  .two,.two.rev,.three,.citywrap,.more{grid-template-columns:1fr}
-  .three .b:first-child{grid-row:auto}
-  .steps,.roles,.map,.loop,.ingr,.dials,.tl{grid-template-columns:1fr 1fr}
+  .slide{padding:calc(var(--gy) + 56px) var(--gx) calc(var(--gy) + 48px);overflow-y:auto;align-content:start}
+  .prod,.prod.big{grid-template-columns:1fr}
+  .cover .fan{position:relative;right:auto;top:auto;width:100%;max-width:none;transform:none;margin-top:28px}
+  .cover.is-active .fan{animation:none}
+  .cover,.s-statement,.close{align-content:start}
+  .steps,.hats,.loop,.ingr,.tl{grid-template-columns:1fr 1fr}
   .loop .n::after{display:none}
-  .steps::before,.tl::before{display:none}
-  .graphwrap,.city{height:52vh}
-  .chartwrap{height:40vh}
-  .docs{height:380px}
-  .doc{width:46%}.doc.a{left:0}.doc.b{left:27%}.doc.c{left:54%}
-  .bubble{top:300px;width:50%}.bubble.r{top:330px;width:46%}
-  .close .contact{grid-template-columns:1fr;gap:14px}
+  .index .row{grid-template-columns:1fr;gap:2px}
+  .graphwrap{height:50vh}
+  .s-city .card{left:16px;right:16px;width:auto;bottom:70px}
+  .close .contact{grid-template-columns:1fr;gap:12px}
   .hint{display:none}
   .counter{right:16px}
+  .stage{display:none}
+  .hat{min-height:0}
+  .hat p{opacity:1;transform:none}
 }
 @media (max-width:560px){
-  .steps,.roles,.map,.loop,.ingr,.dials,.tl{grid-template-columns:1fr}
-  .dial{max-width:200px;margin:0 auto}
+  .steps,.hats,.loop,.ingr,.tl{grid-template-columns:1fr}
+  .stack{aspect-ratio:auto}
+  .stack .shot{position:relative;width:100%}
+  .stack .shot.b{margin-top:12px}
 }
 @media (prefers-reduced-motion:reduce){
-  .slide,.fr,.progress i,.doc,.role,.dial circle.val{transition:none!important}
-  .feed li{animation:none}
+  .slide,.fr,.progress i,.hat p,.hat h3{transition:none!important}
+  .is-active .shot,.cover.is-active .fan{animation:none!important}
 }
 </style>
 </head>
 <body>
 
 <div class="chrome">
-  <div class="wordmark">Jarvis <b>Daily</b></div>
-  <div class="stage" id="stage"></div>
+  <div class="wordmark"><i></i>Jarvis Daily</div>
+  <div class="stage mono" id="stage"></div>
 </div>
 
 <main id="deck">
 
 <!-- 1 Cover -->
-<section class="slide cover" data-stage="" data-notes="Welcome. Thank you for the time. In the next fifteen minutes: what the company does now, how we work with a business, the kinds of builds we have shipped, and where it is heading.">
-  <canvas id="stars"></canvas>
-  <div class="small gold">Tranquil Veda Private Limited</div>
-  <h1>We build AI employees for businesses.</h1>
-  <p class="lede">A walkthrough of what we do now, how we do it, and where it is going.</p>
-  <div class="meta">
-    <span>Prepared for Shitanshu Mishra</span>
-    <span>October 2026</span>
-    <span>jarvisdaily.com</span>
+<section class="slide cover" data-stage="" data-notes="Welcome, and thank you for the time. In about fifteen minutes: what the company does now, how we work with a business, the builds we have shipped, and where it is heading. Everything on the screen is real product, not mockups.">
+  <div class="fan" aria-hidden="true">
+    <figure class="shot a"><img src="img/proposal-chat.jpg" alt=""></figure>
+    <figure class="shot b"><img src="img/crm-dashboard.jpg" alt=""></figure>
+    <figure class="shot c"><img src="img/trading-strategy-chart.jpg" alt=""></figure>
   </div>
+  <div class="mono cap">Tranquil Veda Private Limited</div>
+  <h1>We build AI employees for businesses.</h1>
+  <p class="lede">What we do now, how we do it, and where it is going. Every screen in this walkthrough is a real product we built.</p>
+  <div class="meta mono"><span>October 2026</span><span>jarvisdaily.com</span></div>
 </section>
 
 <!-- 2 Pivot -->
-<section class="slide" data-stage="The pivot" data-notes="Same legal entity, new product. The Skin Rule still ticks along in the background. Jarvis Daily is where all the time and energy goes now: we build software and AI for other businesses.">
-  <h2>Same company. New product.</h2>
+<section class="slide s-statement" data-stage="The pivot" data-notes="Same legal entity, new product. The Skin Rule still ticks along in the background. Jarvis Daily is where all the time and energy goes now: we build software and AI for other businesses.">
+  <h2>Same company. <em>New product.</em></h2>
   <p class="lede">We moved from selling our own product to building software and AI for other businesses.</p>
   <div class="tl">
-    <div class="t fr"><div class="y">The company</div><h3>Tranquil Veda</h3><p>The private limited company you invested in. Unchanged.</p></div>
-    <div class="t fr"><div class="y">Before</div><h3>The Skin Rule</h3><p>Skincare and haircare e-commerce. Still running quietly in the background.</p></div>
-    <div class="t now fr"><div class="y">Now</div><h3>Jarvis Daily</h3><p>Custom software and AI agents, built for each business and run for them. All the energy goes here.</p></div>
+    <div class="t fr"><div class="k">The company</div><h3>Tranquil Veda</h3><p>The private limited company you invested in. Unchanged.</p></div>
+    <div class="t fr"><div class="k">Before</div><h3>The Skin Rule</h3><p>Skincare and haircare e-commerce. Still running quietly in the background.</p></div>
+    <div class="t now fr"><div class="k">Now</div><h3>Jarvis Daily</h3><p>Custom software and AI agents, built for each business and run for them. All the energy goes here.</p></div>
   </div>
 </section>
 
 <!-- 3 What we do -->
-<section class="slide" data-stage="What we do" data-notes="Three things. We write the software a business actually needs. We add AI employees that do the repeated work. And we sit inside the business while we do it, like a forward-deployed engineer, rather than handing over a tool and leaving.">
-  <h2>Custom software, custom agents, <em>built for you, not by you.</em></h2>
+<section class="slide s-statement" data-stage="What we do" data-notes="Three things. We write the software a business actually needs. We add AI employees that do the repeated work. And we sit inside the business while we do it, like a forward-deployed engineer, rather than handing over a tool and leaving.">
+  <h2>Built for you, <em>not by you.</em></h2>
   <div class="three">
-    <div class="b fr"><div class="n">1</div><h3>Custom software</h3><p>The CRM, the dashboard, the engine a business actually needs. Built around how they already work, not a template they must bend to.</p></div>
-    <div class="b fr"><div class="n">2</div><h3>AI employees</h3><p>Agents that do the repeated work: replies, research, drafts, follow-ups, reports. People keep the judgment.</p></div>
-    <div class="b fr"><div class="n">3</div><h3>Forward-deployed engineers</h3><p>We sit inside the business, learn how it runs, and build next to the team. Then we keep running it.</p></div>
+    <div class="b fr"><div class="n">1</div><div><h3>Custom software</h3><p>The CRM, the dashboard, the engine a business actually needs. Built around how they already work, not a template they must bend to.</p></div></div>
+    <div class="b fr"><div class="n">2</div><div><h3>AI employees</h3><p>Agents that do the repeated work: replies, research, drafts, follow-ups, reports. People keep the judgment.</p></div></div>
+    <div class="b fr"><div class="n">3</div><div><h3>Forward-deployed engineers</h3><p>We sit inside the business, learn how it runs, and build next to the team. Then we keep running it.</p></div></div>
   </div>
 </section>
 
-<!-- 4 How an engagement starts -->
-<section class="slide" data-stage="How we work" data-notes="Every engagement starts with an audit, never with a pitch. The audit tells us where the time goes. Then a proposal in plain language, often with a working demo. We walk through it together, build in weeks, and keep running it.">
-  <h2>It always starts with an audit.</h2>
+<!-- 4 How we work -->
+<section class="slide s-statement" data-stage="How we work" data-notes="Every engagement starts with an audit, never with a pitch. The audit tells us where the time goes. Then a proposal in plain language, usually with a working demo. We walk through it together, build in weeks, and keep running it.">
+  <h2>It always starts <em>with an audit.</em></h2>
   <p class="lede">We do not start by selling a tool. We start by understanding how the business runs today.</p>
   <div class="steps">
-    <div class="step fr"><i>1</i><h3>AI audit</h3><p>Who does what, which tools, where the hours go. Part of it is done by our own AI interviewer.</p></div>
-    <div class="step fr"><i>2</i><h3>Findings</h3><p>A short map of where AI and automation fit: sales, marketing, finance, operations.</p></div>
-    <div class="step fr"><i>3</i><h3>Proposal</h3><p>What we will build, in plain words, with a working demo where we can.</p></div>
-    <div class="step fr"><i>4</i><h3>Walkthrough</h3><p>We go through it together. The client says yes, no, or change this.</p></div>
-    <div class="step fr"><i>5</i><h3>Build</h3><p>Weeks, not months. A dashboard shows what was built and how it works.</p></div>
-    <div class="step fr"><i>6</i><h3>Run and improve</h3><p>The system runs every day. We keep tuning it with the team.</p></div>
+    <div class="step fr"><div class="n">1</div><h3>AI audit</h3><p>Who does what, which tools, where the hours go. Part of it is done by our own AI interviewer.</p></div>
+    <div class="step fr"><div class="n">2</div><h3>Findings</h3><p>A short map of where AI and automation fit: sales, marketing, finance, operations.</p></div>
+    <div class="step fr"><div class="n">3</div><h3>Proposal</h3><p>What we will build, in plain words, with a working demo where we can.</p></div>
+    <div class="step fr"><div class="n">4</div><h3>Walkthrough</h3><p>We go through it together. The client says yes, no, or change this.</p></div>
+    <div class="step fr"><div class="n">5</div><h3>Build</h3><p>Weeks, not months. A dashboard shows what was built and how it works.</p></div>
+    <div class="step fr"><div class="n">6</div><h3>Run and improve</h3><p>The system runs every day. We keep tuning it with the team.</p></div>
   </div>
 </section>
 
 <!-- 5 Twelve hats -->
-<section class="slide" data-stage="How we work" data-notes="This is the audit grid. Twelve jobs every business does. We ask who wears each hat today, and how many hours it takes. The three to five most painful rows become the first builds. Hover any tile to see what an AI employee does there.">
-  <h2>Twelve hats every business wears. We ask who wears each one today.</h2>
-  <div class="roles" data-noadvance>
-    <div class="role" tabindex="0"><h3>Inbox and calendar</h3><p>Sorts mail, drafts replies, books meetings.</p></div>
-    <div class="role" tabindex="0"><h3>Customer support</h3><p>Answers on WhatsApp and web, hands over when stuck.</p></div>
-    <div class="role" tabindex="0"><h3>Outbound sales</h3><p>Finds leads, writes the first message, follows up on time.</p></div>
-    <div class="role" tabindex="0"><h3>Inbound calls</h3><p>Picks up, qualifies, books the visit, logs the call.</p></div>
-    <div class="role" tabindex="0"><h3>Social media</h3><p>Researches, drafts posts and reels, reports what worked.</p></div>
-    <div class="role" tabindex="0"><h3>Content and search</h3><p>Writes pages and answers so Google and AI engines find the business.</p></div>
-    <div class="role" tabindex="0"><h3>Email marketing</h3><p>Segments, writes, sends, learns from replies.</p></div>
-    <div class="role" tabindex="0"><h3>Reviews and reputation</h3><p>Asks happy customers, replies to the rest.</p></div>
-    <div class="role" tabindex="0"><h3>Reports and data</h3><p>The Monday numbers, ready before Monday.</p></div>
-    <div class="role" tabindex="0"><h3>Books and GST</h3><p>Reads statements, matches invoices, flags what is due.</p></div>
-    <div class="role" tabindex="0"><h3>Hiring</h3><p>Screens applications, schedules, keeps notes.</p></div>
-    <div class="role" tabindex="0"><h3>Operations</h3><p>The chief of staff: chases what is late, prepares what is next.</p></div>
+<section class="slide s-statement" data-stage="How we work" data-notes="This is the audit grid. Twelve jobs every business does. We ask who wears each hat today and how many hours it takes. The three to five most painful rows become the first builds. Hover any word to see what an AI employee does there.">
+  <h2>Twelve hats every business wears. <em>Who wears each one today?</em></h2>
+  <div class="hats" data-noadvance>
+    <div class="hat"><h3>Inbox and calendar</h3><p>Sorts mail, drafts replies, books meetings.</p></div>
+    <div class="hat"><h3>Customer support</h3><p>Answers on WhatsApp and web, hands over when stuck.</p></div>
+    <div class="hat"><h3>Outbound sales</h3><p>Finds leads, writes the first message, follows up on time.</p></div>
+    <div class="hat"><h3>Inbound calls</h3><p>Picks up, qualifies, books the visit, logs the call.</p></div>
+    <div class="hat"><h3>Social media</h3><p>Researches, drafts posts and reels, reports what worked.</p></div>
+    <div class="hat"><h3>Content and search</h3><p>Writes pages and answers so Google and AI engines find the business.</p></div>
+    <div class="hat"><h3>Email marketing</h3><p>Segments, writes, sends, learns from replies.</p></div>
+    <div class="hat"><h3>Reviews and reputation</h3><p>Asks happy customers, replies to the rest.</p></div>
+    <div class="hat"><h3>Reports and data</h3><p>The Monday numbers, ready before Monday.</p></div>
+    <div class="hat"><h3>Books and GST</h3><p>Reads statements, matches invoices, flags what is due.</p></div>
+    <div class="hat"><h3>Hiring</h3><p>Screens applications, schedules, keeps notes.</p></div>
+    <div class="hat"><h3>Operations</h3><p>The chief of staff: chases what is late, prepares what is next.</p></div>
   </div>
 </section>
 
-<!-- 6 Work map -->
-<section class="slide" data-stage="The work" data-notes="We have deliberately worked across many kinds of businesses. This is the exploring stage: learning which businesses need what. No client names here. The next slides go deeper into the first few.">
-  <h2>Nine kinds of businesses. Nine custom builds.</h2>
-  <p class="lede">Different industries on purpose. Each one taught us where AI fits and where it does not.</p>
-  <div class="map">
-    <div class="tile deep fr"><span class="who">A design studio</span><span class="what">An Agent OS for the whole company</span></div>
-    <div class="tile deep fr"><span class="who">A commodity trading desk</span><span class="what">An algorithmic trading platform</span></div>
-    <div class="tile deep fr"><span class="who">Mutual fund distributors</span><span class="what">A custom CRM and a planning engine</span></div>
-    <div class="tile deep fr"><span class="who">A search-visibility product</span><span class="what">SEO, AEO and GEO audits</span></div>
-    <div class="tile deep fr"><span class="who">An architecture practice</span><span class="what">A proposal engine</span></div>
-    <div class="tile fr"><span class="who">A real estate developer</span><span class="what">Website chat plus an instant AI call-back</span></div>
-    <div class="tile fr"><span class="who">A food business</span><span class="what">WhatsApp order capture with costing</span></div>
-    <div class="tile fr"><span class="who">A loan agent</span><span class="what">A smart enquiry form with lead alerts</span></div>
-    <div class="tile fr"><span class="who">A designers' association</span><span class="what">WhatsApp intelligence for members</span></div>
+<!-- 6 Index of work -->
+<section class="slide s-statement s-index" data-stage="The work" data-notes="We have deliberately worked across many kinds of businesses. This is the exploring stage: learning which businesses need what. No client names here. The next slides show the real products.">
+  <h2>Nine kinds of businesses. <em>Nine custom builds.</em></h2>
+  <div class="index">
+    <div class="row fr"><div class="who">A design studio</div><div class="what">An Agent OS for the whole company<i>twelve months</i></div></div>
+    <div class="row fr"><div class="who">A commodity trading desk</div><div class="what">An algorithmic trading platform<i>live</i></div></div>
+    <div class="row fr"><div class="who">Mutual fund distributors</div><div class="what">A custom CRM, and a planning engine<i>live</i></div></div>
+    <div class="row fr"><div class="who">An architecture practice</div><div class="what">A proposal engine<i>live</i></div></div>
+    <div class="row fr"><div class="who">A search-visibility product</div><div class="what">SEO, AEO and GEO audits<i>live</i></div></div>
+    <div class="row fr"><div class="who">A real estate developer</div><div class="what">Website chat plus an instant AI call-back<i>live</i></div></div>
+    <div class="row fr"><div class="who">A food business</div><div class="what">WhatsApp order capture with costing<i>in build</i></div></div>
+    <div class="row fr"><div class="who">A loan agent</div><div class="what">A smart enquiry form with lead alerts<i>built</i></div></div>
+    <div class="row fr"><div class="who">A designers' association</div><div class="what">WhatsApp intelligence for members<i>built</i></div></div>
   </div>
 </section>
 
 <!-- 7 Agent OS -->
 <section class="slide" data-stage="The work: a design studio" data-notes="A thirty to forty person design studio. We are building their internal Agent OS over a year. Every department gets an AI teammate. They all share one company memory. The method is the ladder: AI does all the legwork, people give judgment and taste at fixed gates, and every correction teaches the agent. Any studio can run like this.">
-  <div class="two rev">
-    <div class="os" aria-label="Six departments connected to one shared memory">
-      <svg viewBox="0 0 500 400" id="ossvg"></svg>
-    </div>
-    <div>
+  <div class="prod">
+    <div class="copy">
+      <div class="mono cap">A design studio</div>
       <h2>One AI teammate per department. One shared memory.</h2>
-      <p class="lede">For a design studio, we are building the operating system the whole company runs on.</p>
-      <div class="ladder">
-        <div class="rung fr"><b>AI does the legwork</b><span>research, drafts, first versions, follow-ups</span></div>
-        <div class="rung h fr"><b>People give judgment</b><span>taste and approval at fixed gates</span></div>
-        <div class="rung fr"><b>Every correction teaches</b><span>the agent learns that person's taste</span></div>
-        <div class="rung h fr"><b>Just talk to it</b><span>on WhatsApp, or by voice</span></div>
-      </div>
+      <ul class="ladder">
+        <li class="fr"><b>AI does the legwork</b><span>research, drafts, first versions, follow-ups</span></li>
+        <li class="h fr"><b>People give judgment</b><span>taste and approval at fixed gates</span></li>
+        <li class="fr"><b>Every correction teaches</b><span>the agent learns that person's taste</span></li>
+        <li class="h fr"><b>Just talk to it</b><span>on WhatsApp, or by voice</span></li>
+      </ul>
     </div>
+    <div class="os" aria-label="Six departments connected to one shared memory"><svg viewBox="0 0 520 445" id="ossvg"></svg></div>
   </div>
 </section>
 
 <!-- 8 Second brain -->
 <section class="slide" data-stage="The work: a design studio" data-notes="This is the second brain. Every client, project, person, meeting, proposal, invoice and lesson is a node. Every agent reads it before acting and writes to it after. Agents do not chat with each other; they share memory. Drag a node, hover to see what it connects to.">
-  <h2>The second brain.</h2>
-  <p class="lede">Every client, project, person, meeting, proposal and invoice is a node. Every agent reads it before acting and writes to it after.</p>
+  <div class="mono cap">A design studio</div>
+  <h2 style="font-size:clamp(30px,3.4vw,52px);max-width:none">The second brain. <span class="muted" style="font-style:italic;font-weight:300">Every client, project, person, meeting, proposal and invoice is a node.</span></h2>
   <div class="graphwrap" data-noadvance><canvas id="graph"></canvas></div>
-  <div class="legend" id="legend"></div>
+  <div class="legend mono" id="legend"></div>
 </section>
 
-<!-- 9 Trading -->
-<section class="slide" data-stage="The work: a trading desk" data-notes="A commodity trading desk gave us their rules. We wrote them as configuration, not as hidden code. Every strategy runs on paper first, then live with a kill switch. The dashboard mirrors the broker account in real time. We are the software vendor; the strategy and the licences stay with the desk.">
-  <div class="two">
-    <div>
-      <h2>A trading desk's rules, executed by software.</h2>
-      <ul class="list">
-        <li class="fr">The desk's own strategy rules, written as configuration <span>so they can read and change them</span></li>
-        <li class="fr">Paper first, then live <span>with a kill switch and daily checks</span></li>
-        <li class="fr">A dashboard that mirrors the broker account <span>in real time</span></li>
-        <li class="fr">Entry and exit markers on the chart <span>parameters editable while it runs</span></li>
-      </ul>
-      <p class="small fr" style="margin-top:14px">We are the software vendor. The strategy and the regulatory licences stay with the desk.</p>
-    </div>
-    <div>
-      <div class="chartwrap"><canvas id="chart"></canvas></div>
-      <div class="ready"><span class="ok">Paper: ready</span><span class="ok">Live: ready</span><span>Token: fresh</span><span>Feed: ticking</span><span class="kill">Kill switch</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 MFD -->
-<section class="slide" data-stage="The work: mutual fund distributors" data-notes="Two firms in mutual fund distribution. For one, a CRM built around how a distributor actually works: client book, SIP tracking, follow-ups, investors, prospects, tasks. The agent layer goes on top next. For the other, we took the firm's own Excel planner and rebuilt it as software; it reproduces their numbers exactly. Move the sliders.">
-  <div class="two">
-    <div>
-      <h2>A CRM built around how a distributor works. Then a planning engine.</h2>
-      <ul class="list">
-        <li class="fr">Client book, SIP tracking, follow-ups <span>investors, prospects, tasks in one place</span></li>
-        <li class="fr">The firm's own Excel planner, rebuilt as software <span>it reproduces their numbers</span></li>
-        <li class="fr">Next: the agent layer <span>a WhatsApp assistant, a research copilot, draft reviews</span></li>
-      </ul>
-    </div>
-    <div class="planner" data-noadvance>
-      <div class="small">Planning engine, live. Illustration only, not advice.</div>
-      <label>Monthly investment <output id="oSip">Rs 25,000</output></label>
-      <input type="range" id="sip" min="5000" max="200000" step="5000" value="25000">
-      <label>Years <output id="oYrs">15</output></label>
-      <input type="range" id="yrs" min="3" max="35" step="1" value="15">
-      <label>Assumed yearly return <output id="oRet">12%</output></label>
-      <input type="range" id="ret" min="6" max="15" step="0.5" value="12">
-      <div class="out">
-        <div><b id="oCorpus">Rs 0</b><span>Projected corpus</span></div>
-        <div><b id="oInvested">Rs 0</b><span>Amount invested</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 AEO GEO -->
-<section class="slide" data-stage="The work: search visibility" data-notes="When someone asks ChatGPT or Gemini for a vendor, does this business show up? That is AEO and GEO: answer engines and generative engines. We built a product that audits a website for classic SEO plus how AI engines read it, and produces a scored report people pay for.">
-  <div class="two">
-    <div>
-      <h2>Being found by AI, not just by Google.</h2>
-      <p class="lede">AEO: Answer Engine Optimisation. GEO: Generative Engine Optimisation. When someone asks an AI for a vendor, does this business show up?</p>
-      <ul class="list findings">
-        <li class="fr">A website audit for classic search <span>and for how AI engines read the site</span></li>
-        <li class="fr">A scored report with fixes <span>paid for online, delivered in minutes</span></li>
-        <li class="fr">Typical findings: <span>no structured data, no answers to the questions people ask, brand never cited by AI</span></li>
-      </ul>
-    </div>
-    <div>
-      <div class="dials">
-        <div class="dial"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50"/><circle class="val" cx="60" cy="60" r="50" data-v="68"/></svg><div class="num">68</div><p>Search (SEO)</p></div>
-        <div class="dial"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50"/><circle class="val" cx="60" cy="60" r="50" data-v="41"/></svg><div class="num">41</div><p>Answers (AEO)</p></div>
-        <div class="dial"><svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50"/><circle class="val" cx="60" cy="60" r="50" data-v="27"/></svg><div class="num">27</div><p>AI engines (GEO)</p></div>
-      </div>
-      <p class="small" style="text-align:center">Sample scores from one audit. Most businesses look like this today.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 12 Proposal engine -->
-<section class="slide" data-stage="The work: an architecture practice" data-notes="An architecture practice wrote every proposal from three separate documents: a firm profile, a scope of work, and an estimate. We built an engine that drafts one proposal from all three, with a chat editor the architect talks to, and an audit trail kept for years.">
-  <div class="two">
-    <div>
-      <h2>Three documents become one proposal, in minutes.</h2>
-      <ul class="list">
-        <li class="fr">Firm profile, scope of work and estimate <span>drafted into one proposal by AI</span></li>
-        <li class="fr">Edited by talking to it <span>"shorten the fee section", and it does</span></li>
-        <li class="fr">Every version kept <span>an audit trail the practice can show for years</span></li>
-      </ul>
-    </div>
-    <div class="docs" id="docs">
-      <div class="doc a"><b>Firm profile</b><i></i><i></i><i></i><i></i></div>
-      <div class="doc b"><b>Scope of work</b><i></i><i></i><i></i><i></i></div>
-      <div class="doc c"><b>Estimate</b><i></i><i></i><i></i><i></i></div>
-      <div class="bubble fr">Shorten the fee section and add the site visit dates.</div>
-      <div class="bubble r fr">Done. Fee section is now four lines. Visits on 14 and 21 October.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 13 More builds -->
-<section class="slide" data-stage="The work: more builds" data-notes="Three smaller builds, each a few weeks. A real estate developer: the website chat captures a number, an AI voice call goes out within a minute, qualifies the buyer, books the site visit, and rates the lead. A food business: WhatsApp order capture with costing and print-ready documents. A loan agent: a smart enquiry form with lead alerts.">
-  <h2>Smaller builds, a few weeks each.</h2>
-  <div class="more">
-    <div class="card fr">
-      <h3>A real estate developer: chat plus an instant AI call-back</h3>
-      <ul class="timeline">
-        <li><b>0:00</b> A buyer asks about a project on the website chat and leaves a number</li>
-        <li><b>0:45</b> An AI voice call goes out, continues the same conversation</li>
-        <li><b>3:10</b> Budget and timeline understood, site visit booked for Saturday</li>
-        <li><b>3:12</b> Rated hot, visible on the sales dashboard with the transcript</li>
+<!-- 9 Trading desk -->
+<section class="slide" data-stage="The work: a trading desk" data-notes="A commodity trading desk gave us their rules. We wrote them as configuration, not hidden code. Every strategy runs on paper first, then live with a kill switch. The board shows every account and every strategy at once. This is the live operator console; the names are blurred.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">A commodity trading desk</div>
+      <h2>Their rules, executed by software.</h2>
+      <ul class="lines">
+        <li class="fr"><b>The desk's own strategy rules, written as configuration</b><span>so they can read and change them</span></li>
+        <li class="fr"><b>Paper first, then live</b><span>with a kill switch and daily checks</span></li>
+        <li class="fr"><b>Every account, every strategy, one board</b><span>the operator sees who is in a trade right now</span></li>
       </ul>
     </div>
     <div class="stack">
-      <div class="card fr"><h3>A food business: orders on WhatsApp, costing behind it</h3><p class="quiet">Orders captured in chat, checked against recipes and vendor rates, turned into quotations, challans and invoices. The owner approves, the system prints.</p></div>
-      <div class="card fr"><h3>A loan agent: a smart enquiry form</h3><p class="quiet">Ten fields that adapt to the applicant, instant alerts on WhatsApp and email, duplicates caught, every lead in one sheet.</p></div>
+      <figure class="shot a"><img src="img/trading-board.jpg" alt="The operator board of the trading platform"><figcaption>Operator board, live</figcaption></figure>
+      <figure class="shot b"><img src="img/trading-strategy-chart.jpg" alt="A strategy chart with indicators"><figcaption>Strategy chart, 3 minute candles</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- 14 Jarvis City -->
-<section class="slide" data-stage="Our own company" data-notes="We run Jarvis Daily the same way. This is Jarvis City: twelve departments, each with an agent that runs on a schedule on our own server and shares one second brain. Nothing moves in the city unless something real happened. A vehicle leaves the signal port when a lead replies or a payment lands. Agents draft everything; a human approves anything that goes out.">
-  <h2>We run our own company the same way.</h2>
-  <div class="citywrap">
-    <div class="city" data-noadvance><svg id="citysvg" viewBox="0 0 900 510" preserveAspectRatio="xMidYMid meet"></svg></div>
-    <div class="feed">
-      <h3>Live activity. A vehicle moves only for a real event.</h3>
-      <ul id="feed"></ul>
-      <div class="layers"><span><i style="background:#E6C96A"></i>Command</span><span><i style="background:#8FA7D9"></i>Main line</span><span><i style="background:#C9A227"></i>Cash</span><span><i style="background:#8A8FA6"></i>Backbone</span></div>
+<!-- 10 Distributor CRM -->
+<section class="slide" data-stage="The work: mutual fund distributors" data-notes="For a mutual fund distribution firm, a CRM built around how a distributor actually works: investors, prospects, tasks, portfolio reviews, meetings, WhatsApp. Nineteen modules. The agent layer goes on top next. This is the real product on their test environment; investor data is blurred.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">A mutual fund distribution firm</div>
+      <h2>A CRM built around how a distributor works.</h2>
+      <ul class="lines">
+        <li class="fr"><b>Investors, prospects, tasks, reviews, meetings</b><span>nineteen modules, one login</span></li>
+        <li class="fr"><b>The morning dashboard</b><span>assets, SIPs, the month's business, who is overdue</span></li>
+        <li class="fr"><b>Next: the agent layer</b><span>a WhatsApp assistant, a research copilot, draft reviews</span></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <figure class="shot a"><img src="img/crm-investors.jpg" alt="The investors module of the CRM"><figcaption>Investors module</figcaption></figure>
+      <figure class="shot b"><img src="img/crm-dashboard.jpg" alt="The CRM dashboard"><figcaption>Morning dashboard</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- 15 Pattern -->
-<section class="slide" data-stage="The pattern" data-notes="Step back and every engagement has the same shape. There is no product. There is a method. Audit, find where AI fits, build custom, show it on a dashboard, run and improve, then audit again because the business has changed.">
-  <h2>There is no product. There is a method.</h2>
-  <p class="lede">Every engagement, whatever the industry, follows the same shape.</p>
+<!-- 11 Planning engine -->
+<section class="slide" data-stage="The work: a wealth planning firm" data-notes="A second firm in the same space runs its financial planning in a complex Excel workbook. We rebuilt that workbook as software. It reproduces their numbers exactly, including the retirement corpus. The advisor answers a few questions, the engine produces the plan, the charts, what to say in the meeting, and a pack the client opens on their phone.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">A wealth planning firm</div>
+      <h2>Their Excel planner, rebuilt as software.</h2>
+      <ul class="lines">
+        <li class="fr"><b>Reproduces the firm's own numbers</b><span>checked line by line against their workbook</span></li>
+        <li class="fr"><b>A few answers in, a full plan out</b><span>goals priced, the gap, what to tell the client</span></li>
+        <li class="fr"><b>A plan pack the client opens on their phone</b><span>sent on WhatsApp</span></li>
+      </ul>
+    </div>
+    <figure class="shot tall"><img src="img/planner-engine.jpg" alt="The planning engine producing a plan"><figcaption>Planning engine, live</figcaption></figure>
+  </div>
+</section>
+
+<!-- 12 Search visibility -->
+<section class="slide" data-stage="The work: search visibility" data-notes="When someone asks ChatGPT or Gemini for a vendor, does this business show up? That is AEO and GEO: answer engines and generative engines. We built a product that audits a website for classic search plus how AI engines read it, and produces a scored report people pay for online.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">A search-visibility product</div>
+      <h2>Being found by AI, not just by Google.</h2>
+      <ul class="lines">
+        <li class="fr"><b>One URL in, three scores out</b><span>search (SEO), answers (AEO), AI engines (GEO)</span></li>
+        <li class="fr"><b>A scored report with fixes</b><span>paid for online, delivered in minutes</span></li>
+        <li class="fr"><b>Built as a product, not a project</b><span>it sells itself from its own website</span></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <figure class="shot a"><img src="img/search-how.jpg" alt="How the audit works"><figcaption>How it works</figcaption></figure>
+      <figure class="shot b"><img src="img/search-home.jpg" alt="The product homepage"><figcaption>Homepage</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 13 Proposal engine -->
+<section class="slide" data-stage="The work: an architecture practice" data-notes="An architecture practice wrote every proposal from three separate documents: a firm profile, a scope of work, and an estimate. We built an engine that drafts one proposal from all three, with a chat editor the architect talks to, in Marathi if they like, and an audit trail of every version. Client names are blurred.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">An architecture practice</div>
+      <h2>Three documents become one proposal, in minutes.</h2>
+      <ul class="lines">
+        <li class="fr"><b>Profile, scope and estimate, drafted into one</b><span>room by room, with concept imagery</span></li>
+        <li class="fr"><b>Edited by talking to it</b><span>"cut the master bedroom budget by 20 percent", and it does</span></li>
+        <li class="fr"><b>Every version kept</b><span>an audit trail the practice can show for years</span></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <figure class="shot a"><img src="img/proposal-list.jpg" alt="The proposals list"><figcaption>All proposals</figcaption></figure>
+      <figure class="shot b"><img src="img/proposal-chat.jpg" alt="The chat editor on a proposal"><figcaption>Chat to edit</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 14 Smaller builds -->
+<section class="slide" data-stage="The work: smaller builds" data-notes="Smaller builds, a few weeks each. A real estate developer: the website chat answers in English or Marathi, captures a number, and an AI voice call goes out within a minute to qualify the buyer and book the site visit. A loan agent: a smart enquiry form with instant lead alerts. A food business: orders on WhatsApp with costing behind them.">
+  <div class="prod big">
+    <div class="copy">
+      <div class="mono cap">Smaller builds</div>
+      <h2>Chat that answers, then calls back.</h2>
+      <ul class="lines">
+        <li class="fr"><b>A real estate developer</b><span>website chat in English and Marathi; when a buyer leaves a number, an AI voice call goes out within a minute, qualifies, and books the site visit</span></li>
+        <li class="fr"><b>A loan agent</b><span>a ten-field enquiry form that adapts to the applicant, instant WhatsApp and email alerts, every lead in one sheet</span></li>
+        <li class="fr"><b>A food business</b><span>orders captured on WhatsApp, checked against recipes and vendor rates, turned into quotations and invoices</span></li>
+      </ul>
+    </div>
+    <div class="stack">
+      <figure class="shot a"><img src="img/realty-chat.jpg" alt="The property chat assistant"><figcaption>Property chat, live</figcaption></figure>
+      <figure class="shot b tall"><img src="img/loan-form.jpg" alt="The loan enquiry form"><figcaption>Loan enquiry form</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 15 Jarvis City -->
+<section class="slide s-city" data-stage="Our own company" data-notes="We run Jarvis Daily the same way. This is Jarvis City, our own operating system drawn as a town. Landmarks are departments, houses across the river are customers, boats are leads, carts on the road are real work moving. Agents run on a schedule on our own server, share one second brain, draft everything, and a human approves anything that goes out.">
+  <div class="bg"><img src="img/jarvis-city-dusk.jpg" alt="Jarvis City, the company drawn as a town"></div>
+  <div class="card">
+    <div class="mono cap">Our own company</div>
+    <h2>We run Jarvis Daily the same way.</h2>
+    <p>Landmarks are departments. Houses across the river are customers. Boats are leads. Every cart on the road is real work moving.</p>
+  </div>
+</section>
+
+<!-- 16 The pattern -->
+<section class="slide s-statement" data-stage="The pattern" data-notes="Step back and every engagement has the same shape. There is no product. There is a method. Audit, find where AI fits, build custom, show it, run and improve, then audit again because the business has changed.">
+  <h2>There is no product. <em>There is a method.</em></h2>
   <div class="loop">
     <div class="n fr"><h3>Audit</h3><p>How the business runs today</p></div>
     <div class="n fr"><h3>Find the fit</h3><p>Sales, marketing, finance, operations</p></div>
@@ -509,35 +469,33 @@ canvas{display:block}
   <p class="loopback fr">Then audit again, because the business has changed.</p>
 </section>
 
-<!-- 16 Direction -->
-<section class="slide" data-stage="Where it goes" data-notes="Where this is heading: an Agent OS for every business, run by us. Three ingredients. We are still shaping which parts become a platform and which stay custom. That is honestly the exploring stage we are in, and a good investor conversation to have.">
-  <h2>Where this goes: an Agent OS for every business, <em>run by us.</em></h2>
-  <p class="lede">Three ingredients, the same in every engagement.</p>
+<!-- 17 Direction -->
+<section class="slide s-statement" data-stage="Where it goes" data-notes="Where this is heading: an Agent OS for every business, run by us. Three ingredients. We are still shaping which parts become a platform and which stay custom. That is honestly the exploring stage we are in, and a good conversation to have with you.">
+  <h2>An Agent OS for every business, <em>run by us.</em></h2>
   <div class="ingr">
     <div class="fr"><h3>Custom software</h3><p>The parts of the business no template fits.</p></div>
     <div class="fr"><h3>AI employees</h3><p>Agents on a schedule, sharing one memory, with people at the gates.</p></div>
     <div class="fr"><h3>Forward-deployed engineers</h3><p>Our people inside the business, building and running it.</p></div>
   </div>
-  <p class="lede fr" style="margin-top:28px">What we are still shaping: which parts become a platform every client shares, and which stay custom. That is the exploring stage we are in.</p>
+  <p class="lede fr" style="margin-top:clamp(20px,3vh,36px)">What we are still shaping: which parts become a platform every client shares, and which stay custom. That is the exploring stage we are in.</p>
 </section>
 
-<!-- 17 Close -->
+<!-- 18 Close -->
 <section class="slide close" data-stage="" data-notes="Close. Every business we meet has one process that eats someone's week. That is where we start: an audit, then a proposal, then a build. Thank you. Shruti is the contact for anything that follows.">
-  <canvas id="stars2"></canvas>
   <h1>Every business has one process that eats someone's week.</h1>
   <p class="lede" style="margin-top:18px">That is where we start. An audit, then a proposal, then a build.</p>
   <div class="contact">
-    <div><span>Contact</span>Shruti Pethkar</div>
-    <div><span>Email</span>shruti@jarvisdaily.com</div>
-    <div><span>WhatsApp</span>+91 96737 58777</div>
+    <div><span class="mono">Contact</span>Shruti Pethkar</div>
+    <div><span class="mono">Email</span>shruti@jarvisdaily.com</div>
+    <div><span class="mono">WhatsApp</span>+91 96737 58777</div>
   </div>
 </section>
 
 </main>
 
 <div class="progress"><i id="bar"></i></div>
-<div class="counter" id="counter"></div>
-<div class="hint" id="hint"><kbd>&rarr;</kbd> next <kbd>&larr;</kbd> back <kbd>N</kbd> notes <kbd>F</kbd> full screen</div>
+<div class="counter mono" id="counter"></div>
+<div class="hint mono" id="hint"><kbd>&rarr;</kbd> next <kbd>&larr;</kbd> back <kbd>N</kbd> notes <kbd>F</kbd> full screen</div>
 <div class="notes" id="notes" hidden></div>
 
 <script>
@@ -547,49 +505,36 @@ var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce
 var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
 var cur = -1, fragIdx = 0;
 var bar = document.getElementById('bar'), counter = document.getElementById('counter'), stage = document.getElementById('stage'), hint = document.getElementById('hint'), notes = document.getElementById('notes');
-var hooks = {};  // slide index -> {enter, leave}
+var hooks = {};
 
 function frags(i){ return Array.prototype.slice.call(slides[i].querySelectorAll('.fr')); }
 function showFrags(i, n){ frags(i).forEach(function(el,k){ el.classList.toggle('on', k < n); }); }
+function preload(i){ for (var k = i + 1; k <= i + 2 && k < slides.length; k++){ slides[k].querySelectorAll('img').forEach(function(im){ var p = new Image(); p.src = im.getAttribute('src'); }); } }
 
 function go(i, dir, allFrags){
   if (i < 0 || i >= slides.length || i === cur) return;
-  if (cur >= 0){
-    slides[cur].classList.remove('is-active');
-    slides[cur].classList.toggle('back', dir < 0 ? false : true);
-    if (hooks[cur] && hooks[cur].leave) hooks[cur].leave();
-  }
-  var prev = cur; cur = i;
+  if (cur >= 0){ slides[cur].classList.remove('is-active'); slides[cur].classList.toggle('back', dir > 0); if (hooks[cur] && hooks[cur].leave) hooks[cur].leave(); }
+  cur = i;
   var s = slides[i];
   s.classList.toggle('back', dir < 0);
-  // force reflow so the entering transform applies
   void s.offsetWidth;
   s.classList.add('is-active');
   var fs = frags(i);
   fragIdx = allFrags ? fs.length : 0;
   showFrags(i, fragIdx);
-  bar.style.width = ((i) / (slides.length - 1) * 100) + '%';
+  bar.style.width = (i / (slides.length - 1) * 100) + '%';
   counter.textContent = (i + 1) + ' / ' + slides.length;
   stage.textContent = s.getAttribute('data-stage') || '';
+  document.body.classList.toggle('on-city', s.classList.contains('s-city'));
   hint.style.opacity = i === 0 ? 1 : 0;
-  notes.textContent = '';
   if (!notes.hidden) renderNotes();
   if (history.replaceState) history.replaceState(null, '', '#' + (i + 1));
   if (hooks[i] && hooks[i].enter) hooks[i].enter();
+  preload(i);
 }
-function next(){
-  var fs = frags(cur);
-  if (fragIdx < fs.length){ fragIdx++; showFrags(cur, fragIdx); if (hooks[cur] && hooks[cur].frag) hooks[cur].frag(fragIdx); return; }
-  go(cur + 1, 1, false);
-}
-function prev(){
-  if (fragIdx > 0){ fragIdx--; showFrags(cur, fragIdx); if (hooks[cur] && hooks[cur].frag) hooks[cur].frag(fragIdx); return; }
-  go(cur - 1, -1, true);
-}
-function renderNotes(){
-  var t = slides[cur].getAttribute('data-notes') || '';
-  notes.innerHTML = '<b>Notes ' + (cur + 1) + '</b> ' + t;
-}
+function next(){ var fs = frags(cur); if (fragIdx < fs.length){ fragIdx++; showFrags(cur, fragIdx); return; } go(cur + 1, 1, false); }
+function prev(){ if (fragIdx > 0){ fragIdx--; showFrags(cur, fragIdx); return; } go(cur - 1, -1, true); }
+function renderNotes(){ notes.innerHTML = '<b>' + (cur + 1) + '</b>' + (slides[cur].getAttribute('data-notes') || ''); }
 document.addEventListener('keydown', function(e){
   if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName) && e.key !== 'Escape') return;
   switch (e.key){
@@ -604,79 +549,52 @@ document.addEventListener('keydown', function(e){
 });
 document.getElementById('deck').addEventListener('click', function(e){
   if (e.target.closest('[data-noadvance], input, button, a')) return;
-  var x = e.clientX / window.innerWidth;
-  if (x < 0.22) prev(); else next();
+  if (e.clientX / window.innerWidth < 0.2) prev(); else next();
 });
-var tx = null, ty = null, swiped = false;
-document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; swiped = false; }, {passive:true});
-document.addEventListener('touchend', function(e){
-  if (tx === null) return;
-  var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
-  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4){ swiped = true; if (dx < 0) next(); else prev(); }
-  tx = ty = null;
-}, {passive:true});
+var tx = null, ty = null;
+document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4){ if (dx < 0) next(); else prev(); } tx = ty = null; }, {passive:true});
 
-/* ---------- helpers ---------- */
 function dpr(){ return Math.min(window.devicePixelRatio || 1, 2); }
 function fit(cv){ var r = cv.getBoundingClientRect(), d = dpr(); cv.width = Math.max(1, r.width * d); cv.height = Math.max(1, r.height * d); var c = cv.getContext('2d'); c.setTransform(d, 0, 0, d, 0, 0); return {ctx:c, w:r.width, h:r.height}; }
-function mulberry(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-function fmtINR(n){ n = Math.round(n); var s = String(n), last3 = s.slice(-3), rest = s.slice(0, -3); if (rest) last3 = ',' + last3; return 'Rs ' + rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + last3; }
 
-/* ---------- constellation (cover + close) ---------- */
-function stars(id){
-  var cv = document.getElementById(id); if (!cv) return null;
-  var raf = 0, pts = [], S = null, rnd = mulberry(7);
-  function init(){ S = fit(cv); pts = []; var n = Math.round(S.w * S.h / 16000); for (var i = 0; i < n; i++) pts.push({x: rnd() * S.w, y: rnd() * S.h, vx: (rnd() - .5) * .18, vy: (rnd() - .5) * .18, r: 1 + rnd() * 1.6}); }
-  function draw(){
-    var c = S.ctx; c.clearRect(0, 0, S.w, S.h);
-    for (var i = 0; i < pts.length; i++){ var p = pts[i]; if (!RM){ p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > S.w) p.vx *= -1; if (p.y < 0 || p.y > S.h) p.vy *= -1; } }
-    c.lineWidth = 1;
-    for (var a = 0; a < pts.length; a++) for (var b = a + 1; b < pts.length; b++){ var dx = pts[a].x - pts[b].x, dy = pts[a].y - pts[b].y, d = dx * dx + dy * dy; if (d < 150 * 150){ c.strokeStyle = 'rgba(201,162,39,' + (0.16 * (1 - d / 22500)).toFixed(3) + ')'; c.beginPath(); c.moveTo(pts[a].x, pts[a].y); c.lineTo(pts[b].x, pts[b].y); c.stroke(); } }
-    for (var k = 0; k < pts.length; k++){ c.fillStyle = 'rgba(230,201,106,.55)'; c.beginPath(); c.arc(pts[k].x, pts[k].y, pts[k].r, 0, 6.283); c.fill(); }
-    if (!RM) raf = requestAnimationFrame(draw);
-  }
-  return { enter: function(){ init(); cancelAnimationFrame(raf); draw(); }, leave: function(){ cancelAnimationFrame(raf); } };
-}
-hooks[0] = stars('stars');
-hooks[slides.length - 1] = stars('stars2');
+/* twelve hats: light up one by one on entry */
+hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.hat'); var k = 0; var t = setInterval(function(){ tiles.forEach(function(x){ x.classList.remove('lit'); }); if (k < tiles.length && !RM){ tiles[k].classList.add('lit'); k++; } else clearInterval(t); }, 650); hooks[4]._t = t; }, leave: function(){ clearInterval(hooks[4]._t); slides[4].querySelectorAll('.hat').forEach(function(x){ x.classList.remove('lit'); }); } };
 
-/* ---------- 12 hats: light tiles one by one on entry ---------- */
-hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.role'); var k = 0; var t = setInterval(function(){ tiles.forEach(function(x){ x.classList.remove('lit'); }); if (k < tiles.length && !RM){ tiles[k].classList.add('lit'); k++; } else clearInterval(t); }, 700); hooks[4]._t = t; }, leave: function(){ clearInterval(hooks[4]._t); slides[4].querySelectorAll('.role').forEach(function(x){ x.classList.remove('lit'); }); } };
-
-/* ---------- Agent OS diagram (SVG) ---------- */
+/* agent OS diagram */
 (function(){
   var svg = document.getElementById('ossvg'); if (!svg) return;
   var NS = 'http://www.w3.org/2000/svg';
-  var cx = 250, cy = 200, R = 150;
+  var cx = 260, cy = 205, R = 158;
   var deps = ['Projects', 'Marketing', 'Sales', 'Finance', 'Admin', 'People'];
   function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
-  svg.appendChild(el('circle', {cx: cx, cy: cy, r: 54, 'class': 'hub'}));
-  var t = el('text', {x: cx, y: cy - 4, 'text-anchor': 'middle'}); t.textContent = 'Shared'; svg.appendChild(t);
-  t = el('text', {x: cx, y: cy + 14, 'text-anchor': 'middle'}); t.textContent = 'memory'; svg.appendChild(t);
+  svg.appendChild(el('circle', {cx: cx, cy: cy, r: 58, 'class': 'hub'}));
+  svg.appendChild(el('circle', {cx: cx, cy: cy, r: 64, 'class': 'hub', 'stroke-dasharray': '2 4', 'opacity': .5}));
+  var t = el('text', {x: cx, y: cy - 3, 'text-anchor': 'middle'}); t.textContent = 'Shared'; svg.appendChild(t);
+  t = el('text', {x: cx, y: cy + 16, 'text-anchor': 'middle'}); t.textContent = 'memory'; svg.appendChild(t);
   deps.forEach(function(d, i){
     var a = -Math.PI / 2 + i * Math.PI * 2 / deps.length, x = cx + Math.cos(a) * R, y = cy + Math.sin(a) * R;
-    var x1 = cx + Math.cos(a) * 56, y1 = cy + Math.sin(a) * 56, x2 = cx + Math.cos(a) * (R - 40), y2 = cy + Math.sin(a) * (R - 40);
+    var x1 = cx + Math.cos(a) * 66, y1 = cy + Math.sin(a) * 66, x2 = cx + Math.cos(a) * (R - 26), y2 = cy + Math.sin(a) * (R - 26);
     svg.appendChild(el('line', {x1: x1, y1: y1, x2: x2, y2: y2, 'class': 'spoke'}));
-    svg.appendChild(el('rect', {x: x - 48, y: y - 24, width: 96, height: 48, rx: 10, 'class': 'dep'}));
-    var tt = el('text', {x: x, y: y - 3, 'text-anchor': 'middle'}); tt.textContent = d; svg.appendChild(tt);
-    var ag = el('text', {x: x, y: y + 14, 'text-anchor': 'middle', fill: '#A9ACBC', 'font-size': '11'}); ag.textContent = 'agent + people'; svg.appendChild(ag);
+    svg.appendChild(el('circle', {cx: x, cy: y, r: 3, fill: '#17181C'}));
+    var side = Math.cos(a) > .1 ? 'start' : (Math.cos(a) < -.1 ? 'end' : 'middle');
+    var ox = side === 'start' ? 10 : (side === 'end' ? -10 : 0), oy = Math.sin(a) < -.5 ? -12 : (Math.sin(a) > .5 ? 24 : 5);
+    var tt = el('text', {x: x + ox, y: y + oy, 'text-anchor': side}); tt.textContent = d; svg.appendChild(tt);
+    var ag = el('text', {x: x + ox, y: y + oy + 15, 'text-anchor': side, 'class': 's'}); ag.textContent = 'one agent, the team'; svg.appendChild(ag);
     if (!RM){
-      var p = el('circle', {r: 3.2, 'class': 'pulse'});
-      var am = el('animateMotion', {dur: (3.2 + i * 0.37) + 's', repeatCount: 'indefinite', path: 'M' + x2 + ',' + y2 + ' L' + x1 + ',' + y1});
-      p.appendChild(am); svg.appendChild(p);
-      var h = el('circle', {r: 3.2, 'class': 'human'});
-      var am2 = el('animateMotion', {dur: (4.1 + i * 0.29) + 's', repeatCount: 'indefinite', path: 'M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2});
-      h.appendChild(am2); svg.appendChild(h);
+      var p = el('circle', {r: 3, 'class': 'pulse'});
+      var am = el('animateMotion', {dur: (3.4 + i * 0.37) + 's', repeatCount: 'indefinite', path: 'M' + x2 + ',' + y2 + ' L' + x1 + ',' + y1}); p.appendChild(am); svg.appendChild(p);
+      var h = el('circle', {r: 3, 'class': 'human'});
+      var am2 = el('animateMotion', {dur: (4.3 + i * 0.29) + 's', repeatCount: 'indefinite', path: 'M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2}); h.appendChild(am2); svg.appendChild(h);
     }
   });
-  var k = el('text', {x: cx, y: 384, 'text-anchor': 'middle', fill: '#A9ACBC', 'font-size': '12'}); k.textContent = 'Gold dots: agents writing what they did.'; svg.appendChild(k);
-  var k2 = el('text', {x: cx, y: 402, 'text-anchor': 'middle', fill: '#A9ACBC', 'font-size': '12'}); k2.textContent = 'Blue dots: people deciding at the gates.'; svg.appendChild(k2);
+  var k = el('text', {x: cx, y: 434, 'text-anchor': 'middle', 'class': 's'}); k.textContent = 'Gold: agents writing what they did. Blue: people deciding at the gates.'; svg.appendChild(k);
 })();
 
-/* ---------- Second brain graph (canvas, force layout) ---------- */
+/* second brain graph */
 (function(){
   var cv = document.getElementById('graph'); if (!cv) return;
-  var TYPES = {client:'#C9A227', project:'#8FA7D9', person:'#F3EEE2', meeting:'#9DC8A6', proposal:'#E6C96A', invoice:'#D9A5A5', lesson:'#C7B5E8', content:'#8FD3D3'};
+  var TYPES = {client:'#9C7A14', project:'#5B6A96', person:'#17181C', meeting:'#4F8A5E', proposal:'#C9A227', invoice:'#B0574F', lesson:'#7A5FA3', content:'#2E8A8A'};
   var LABEL = {client:'Client', project:'Project', person:'Person', meeting:'Meeting', proposal:'Proposal', invoice:'Invoice', lesson:'Lesson', content:'Content'};
   var legend = document.getElementById('legend'); Object.keys(TYPES).forEach(function(k){ var s = document.createElement('span'); s.innerHTML = '<i style="background:' + TYPES[k] + '"></i>' + LABEL[k]; legend.appendChild(s); });
   var N = [], E = [];
@@ -696,21 +614,21 @@ hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.role');
   edge('c4','p5'); edge('c4','h4'); edge('c4','m2'); edge('p5','l4'); edge('p5','q4'); edge('q4','i4'); edge('h4','m5');
   edge('l1','l4'); edge('l2','l3'); edge('m5','t1');
   var byId = {}; N.forEach(function(n){ byId[n.id] = n; });
-  var S = null, raf = 0, hover = null, drag = null, rnd = mulberry(11), alpha = 1;
-  function init(){ S = fit(cv); N.forEach(function(n, i){ var a = i * 2.39996, rr = 40 + 10 * Math.sqrt(i); n.x = S.w / 2 + Math.cos(a) * rr; n.y = S.h / 2 + Math.sin(a) * rr; n.vx = n.vy = 0; }); alpha = 1; }
+  var S = null, raf = 0, hover = null, drag = null;
+  function init(){ S = fit(cv); N.forEach(function(n, i){ var a = i * 2.39996, rr = 40 + 11 * Math.sqrt(i); n.x = S.w / 2 + Math.cos(a) * rr; n.y = S.h / 2 + Math.sin(a) * rr; n.vx = n.vy = 0; }); }
   function step(){
     var i, j, a, b, dx, dy, d, f;
     for (i = 0; i < N.length; i++) for (j = i + 1; j < N.length; j++){ a = N[i]; b = N[j]; dx = b.x - a.x; dy = b.y - a.y; d = Math.sqrt(dx * dx + dy * dy) || 1; f = 3400 / (d * d); if (d < 320){ dx = dx / d * f; dy = dy / d * f; a.vx -= dx; a.vy -= dy; b.vx += dx; b.vy += dy; } }
     for (i = 0; i < E.length; i++){ a = byId[E[i][0]]; b = byId[E[i][1]]; dx = b.x - a.x; dy = b.y - a.y; d = Math.sqrt(dx * dx + dy * dy) || 1; f = (d - 92) * 0.012; dx = dx / d * f; dy = dy / d * f; a.vx += dx; a.vy += dy; b.vx -= dx; b.vy -= dy; }
-    for (i = 0; i < N.length; i++){ a = N[i]; if (a === drag) continue; a.vx += (S.w / 2 - a.x) * 0.0014; a.vy += (S.h / 2 - a.y) * 0.0016; a.vx *= 0.82; a.vy *= 0.82; a.x += a.vx * alpha; a.y += a.vy * alpha; a.x = Math.max(14, Math.min(S.w - 14, a.x)); a.y = Math.max(14, Math.min(S.h - 14, a.y)); }
+    for (i = 0; i < N.length; i++){ a = N[i]; if (a === drag) continue; a.vx += (S.w / 2 - a.x) * 0.0014; a.vy += (S.h / 2 - a.y) * 0.0016; a.vx *= 0.82; a.vy *= 0.82; a.x += a.vx; a.y += a.vy; a.x = Math.max(14, Math.min(S.w - 14, a.x)); a.y = Math.max(14, Math.min(S.h - 14, a.y)); }
   }
   function draw(){
     var c = S.ctx; c.clearRect(0, 0, S.w, S.h);
     var hi = hover ? {} : null; if (hover){ hi[hover.id] = 1; E.forEach(function(e){ if (e[0] === hover.id) hi[e[1]] = 1; if (e[1] === hover.id) hi[e[0]] = 1; }); }
     c.lineWidth = 1;
-    E.forEach(function(e){ var a = byId[e[0]], b = byId[e[1]]; var on = hi && (e[0] === hover.id || e[1] === hover.id); c.strokeStyle = on ? 'rgba(230,201,106,.85)' : (hi ? 'rgba(243,238,226,.05)' : 'rgba(243,238,226,.16)'); c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); });
+    E.forEach(function(e){ var a = byId[e[0]], b = byId[e[1]]; var on = hi && (e[0] === hover.id || e[1] === hover.id); c.strokeStyle = on ? 'rgba(156,122,20,.9)' : (hi ? 'rgba(23,24,28,.06)' : 'rgba(23,24,28,.2)'); c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); });
     c.font = '12px "Instrument Sans", sans-serif'; c.textBaseline = 'middle';
-    N.forEach(function(n){ var dim = hi && !hi[n.id]; c.globalAlpha = dim ? .25 : 1; c.fillStyle = TYPES[n.t]; c.beginPath(); c.arc(n.x, n.y, n.r, 0, 6.283); c.fill(); if (n.r > 7 || !dim && (hi || S.w > 700)){ c.fillStyle = dim ? 'rgba(243,238,226,.5)' : 'rgba(243,238,226,.92)'; c.fillText(n.l, n.x + n.r + 6, n.y); } c.globalAlpha = 1; });
+    N.forEach(function(n){ var dim = hi && !hi[n.id]; c.globalAlpha = dim ? .25 : 1; c.fillStyle = TYPES[n.t]; c.beginPath(); c.arc(n.x, n.y, n.r, 0, 6.283); c.fill(); if (n.r > 7 || !dim && (hi || S.w > 700)){ c.fillStyle = 'rgba(23,24,28,.85)'; c.fillText(n.l, n.x + n.r + 6, n.y); } c.globalAlpha = 1; });
   }
   function loop(){ step(); draw(); if (!RM) raf = requestAnimationFrame(loop); }
   function pt(e){ var r = cv.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; }
@@ -722,135 +640,7 @@ hooks[4] = { enter: function(){ var tiles = slides[4].querySelectorAll('.role');
   hooks[7] = { enter: function(){ init(); cancelAnimationFrame(raf); if (RM){ for (var k = 0; k < 220; k++) step(); draw(); } else loop(); }, leave: function(){ cancelAnimationFrame(raf); } };
 })();
 
-/* ---------- Trading chart (canvas) ---------- */
-(function(){
-  var cv = document.getElementById('chart'); if (!cv) return;
-  var S = null, raf = 0, candles = [], shown = 0, t0 = 0;
-  function gen(){ var rnd = mulberry(23), p = 100, out = []; for (var i = 0; i < 64; i++){ var drift = i > 18 && i < 42 ? 0.35 : (i >= 42 ? -0.15 : 0.05); var o = p, cl = p + (rnd() - .5) * 2.4 + drift, h = Math.max(o, cl) + rnd() * 1.1, l = Math.min(o, cl) - rnd() * 1.1; out.push({o:o, c:cl, h:h, l:l}); p = cl; } return out; }
-  function draw(){
-    var c = S.ctx, w = S.w, h = S.h, pad = 28, pr = 70; c.clearRect(0, 0, w, h);
-    var vis = candles.slice(0, shown); if (!vis.length) return;
-    var lo = Infinity, hi = -Infinity; candles.forEach(function(k){ lo = Math.min(lo, k.l); hi = Math.max(hi, k.h); }); lo -= 1; hi += 1;
-    var cw = (w - pad - pr) / candles.length, y = function(v){ return pad + (hi - v) / (hi - lo) * (h - pad * 2); };
-    c.strokeStyle = 'rgba(243,238,226,.07)'; c.lineWidth = 1; for (var g = 0; g < 5; g++){ var gy = pad + g * (h - pad * 2) / 4; c.beginPath(); c.moveTo(pad, gy); c.lineTo(w - pr, gy); c.stroke(); }
-    c.font = '11px "Instrument Sans"'; c.fillStyle = '#6E7288'; c.textAlign = 'left';
-    for (var g2 = 0; g2 < 5; g2++){ var v = hi - g2 * (hi - lo) / 4; c.fillText(v.toFixed(1), w - pr + 8, pad + g2 * (h - pad * 2) / 4 + 4); }
-    vis.forEach(function(k, i){ var x = pad + i * cw + cw / 2, up = k.c >= k.o; c.strokeStyle = up ? '#9DC8A6' : '#D9A5A5'; c.fillStyle = c.strokeStyle; c.lineWidth = 1; c.beginPath(); c.moveTo(x, y(k.h)); c.lineTo(x, y(k.l)); c.stroke(); var top = y(Math.max(k.o, k.c)), bh = Math.max(1.5, Math.abs(y(k.o) - y(k.c))); c.fillRect(x - cw * 0.32, top, cw * 0.64, bh); });
-    function marker(i, label, up){ if (shown <= i) return; var x = pad + i * cw + cw / 2, yy = up ? y(candles[i].l) + 14 : y(candles[i].h) - 14; c.fillStyle = '#E6C96A'; c.beginPath(); if (up){ c.moveTo(x, yy - 8); c.lineTo(x - 6, yy + 2); c.lineTo(x + 6, yy + 2); } else { c.moveTo(x, yy + 8); c.lineTo(x - 6, yy - 2); c.lineTo(x + 6, yy - 2); } c.closePath(); c.fill(); c.font = '12px "Instrument Sans"'; c.textAlign = 'center'; c.fillStyle = '#E6C96A'; c.fillText(label, x, up ? yy + 18 : yy - 14); }
-    marker(18, 'Entry', true); marker(41, 'Exit', false);
-    if (shown > 18){ var sl = candles[18].l - 1.2; c.setLineDash([4, 4]); c.strokeStyle = 'rgba(217,165,165,.7)'; c.beginPath(); c.moveTo(pad + 18 * cw, y(sl)); c.lineTo(pad + Math.min(shown, 42) * cw, y(sl)); c.stroke(); c.setLineDash([]); c.fillStyle = '#D9A5A5'; c.textAlign = 'left'; c.fillText('stop', pad + Math.min(shown, 42) * cw + 6, y(sl) + 4); }
-    c.fillStyle = '#A9ACBC'; c.textAlign = 'left'; c.font = '12px "Instrument Sans"'; c.fillText('Strategy v4, paper session, one day', pad, 16);
-  }
-  function tick(ts){ if (!t0) t0 = ts; var n = Math.min(candles.length, 1 + Math.floor((ts - t0) / 55)); if (n !== shown){ shown = n; draw(); } if (shown < candles.length) raf = requestAnimationFrame(tick); }
-  hooks[8] = { enter: function(){ S = fit(cv); candles = gen(); cancelAnimationFrame(raf); if (RM){ shown = candles.length; draw(); } else { shown = 0; t0 = 0; raf = requestAnimationFrame(tick); } }, leave: function(){ cancelAnimationFrame(raf); } };
-})();
-
-/* ---------- Planning engine ---------- */
-(function(){
-  var sip = document.getElementById('sip'); if (!sip) return;
-  var yrs = document.getElementById('yrs'), ret = document.getElementById('ret');
-  function calc(){
-    var P = +sip.value, n = +yrs.value * 12, r = (+ret.value / 100) / 12;
-    var fv = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-    document.getElementById('oSip').textContent = fmtINR(P); document.getElementById('oYrs').textContent = yrs.value; document.getElementById('oRet').textContent = ret.value + '%';
-    document.getElementById('oCorpus').textContent = fmtINR(fv); document.getElementById('oInvested').textContent = fmtINR(P * n);
-  }
-  [sip, yrs, ret].forEach(function(i){ i.addEventListener('input', calc); });
-  calc();
-})();
-
-/* ---------- Dials ---------- */
-hooks[10] = { enter: function(){ slides[10].querySelectorAll('circle.val').forEach(function(c){ var L = 2 * Math.PI * 50; c.style.strokeDasharray = L; c.style.strokeDashoffset = L; requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.style.strokeDashoffset = L * (1 - (+c.getAttribute('data-v')) / 100); }); }); }); } };
-
-/* ---------- Proposal engine merge ---------- */
-hooks[11] = { enter: function(){ var d = document.getElementById('docs'); d.classList.remove('merged'); hooks[11]._t = setTimeout(function(){ d.classList.add('merged'); }, RM ? 0 : 900); }, leave: function(){ clearTimeout(hooks[11]._t); } };
-
-/* ---------- Jarvis City (isometric SVG) ---------- */
-(function(){
-  var svg = document.getElementById('citysvg'); if (!svg) return;
-  var NS = 'http://www.w3.org/2000/svg';
-  function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
-  var TW = 56, TH = 28, OX = 450, OY = 74;
-  function P(gx, gy){ return {x: OX + (gx - gy) * TW, y: OY + (gx + gy) * TH}; }
-  var LAYER = {command:['#E6C96A','#B08A1F','#8C6B12'], main:['#8FA7D9','#5C73A8','#44557F'], cash:['#C9A227','#9A7A18','#755C10'], back:['#8A8FA6','#5E6378','#474B5C']};
-  var B = [
-    {id:'port', n:'Signal port', l:'back', gx:0, gy:0.4, h:26, s:.9},
-    {id:'command', n:'Command', l:'command', gx:3, gy:0.4, h:96, s:.8},
-    {id:'engine', n:'Engine room', l:'back', gx:6, gy:0.4, h:44, s:.9},
-    {id:'attract', n:'Attract', l:'main', gx:0, gy:3, h:52, s:.85},
-    {id:'connect', n:'Connect', l:'main', gx:1, gy:3, h:46, s:.8},
-    {id:'win', n:'Win', l:'main', gx:2, gy:3, h:58, s:.8},
-    {id:'build', n:'Build', l:'main', gx:4, gy:3, h:66, s:.8},
-    {id:'care', n:'Care', l:'main', gx:5, gy:3, h:44, s:.8},
-    {id:'grow', n:'Grow', l:'main', gx:6, gy:3, h:50, s:.85},
-    {id:'collect', n:'Collect', l:'cash', gx:0, gy:5.6, h:40, s:.85},
-    {id:'books', n:'Books', l:'back', gx:2, gy:5.6, h:48, s:.85},
-    {id:'team', n:'Team', l:'back', gx:4, gy:5.6, h:36, s:.85},
-    {id:'lab', n:'Lab', l:'back', gx:6, gy:5.6, h:56, s:.85}
-  ];
-  var byId = {}; B.forEach(function(b){ byId[b.id] = b; });
-  var RA = 1.5, RB = 4.5, SP = 3;  // road rows and spine column
-  function roadPath(pts){ return pts.map(function(p, i){ var q = P(p[0], p[1]); return (i ? 'L' : 'M') + q.x.toFixed(1) + ',' + q.y.toFixed(1); }).join(' '); }
-  var roads = [ [[-0.6, RA], [6.6, RA]], [[-0.6, RB], [6.6, RB]], [[SP, RA], [SP, RB]], [[-0.6, RA], [-0.6, RB]], [[6.6, RA], [6.6, RB]] ];
-  // ground
-  var ground = el('path', {d: roadPath([[-1.2, -0.5], [7.4, -0.5], [7.4, 6.6], [-1.2, 6.6], [-1.2, -0.5]]), fill: 'rgba(143,167,217,.06)', stroke: 'rgba(243,238,226,.08)'}); svg.appendChild(ground);
-  roads.forEach(function(r){ svg.appendChild(el('path', {d: roadPath(r), stroke: 'rgba(243,238,226,.12)', 'stroke-width': 9, 'stroke-linecap': 'round', fill: 'none'})); svg.appendChild(el('path', {d: roadPath(r), stroke: 'rgba(230,201,106,.35)', 'stroke-width': 1, 'stroke-dasharray': '6 8', fill: 'none'})); });
-  // buildings sorted by depth
-  B.slice().sort(function(a, b){ return (a.gx + a.gy) - (b.gx + b.gy); }).forEach(function(b){
-    var s = b.s / 2, c = LAYER[b.l];
-    var p0 = P(b.gx - s, b.gy - s), p1 = P(b.gx + s, b.gy - s), p2 = P(b.gx + s, b.gy + s), p3 = P(b.gx - s, b.gy + s);
-    var g = el('g', {'data-id': b.id});
-    function poly(pts, fill, extra){ var e = el('polygon', {points: pts.map(function(p){ return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' '), fill: fill}); if (extra) for (var k in extra) e.setAttribute(k, extra[k]); return e; }
-    var up = function(p){ return {x: p.x, y: p.y - b.h}; };
-    g.appendChild(poly([p3, p2, {x: p2.x, y: p2.y - b.h}, {x: p3.x, y: p3.y - b.h}], c[1]));
-    g.appendChild(poly([p2, p1, {x: p1.x, y: p1.y - b.h}, {x: p2.x, y: p2.y - b.h}], c[2]));
-    g.appendChild(poly([up(p0), up(p1), up(p2), up(p3)], c[0], {stroke: 'rgba(14,16,32,.35)', 'stroke-width': .6}));
-    // windows (night)
-    if (b.h > 40){ var sl = (p2.y - p3.y) / (p2.x - p3.x); for (var wy = 10; wy < b.h - 8; wy += 11) for (var wx = 0; wx < 3; wx++){ var fx = p3.x + 6 + wx * ((p2.x - p3.x - 10) / 3), fy = p3.y - wy + (fx - p3.x) * sl; g.appendChild(poly([{x: fx, y: fy - 4}, {x: fx + 4, y: fy - 4 + sl * 4}, {x: fx + 4, y: fy - 0.8 + sl * 4}, {x: fx, y: fy - 0.8}], 'rgba(243,238,226,.35)')); } }
-    var ring = el('ellipse', {cx: P(b.gx, b.gy).x, cy: P(b.gx, b.gy).y, rx: TW * b.s * .9, ry: TH * b.s * .9, fill: 'none', stroke: '#E6C96A', 'stroke-width': 1.5, opacity: 0, 'class': 'ring'}); g.appendChild(ring);
-    var t = el('text', {x: P(b.gx, b.gy).x, y: P(b.gx, b.gy).y - b.h - TH * b.s - 7, 'text-anchor': 'middle'}); t.textContent = b.n; g.appendChild(t);
-    svg.appendChild(g); b.g = g; b.ring = ring;
-  });
-  // vehicles layer
-  var VL = el('g'); svg.appendChild(VL);
-  function routeTo(b){
-    var pts = [[0, 0.4], [0, RA]];
-    if (b.gy < 2){ pts.push([b.gx, RA]); pts.push([b.gx, b.gy + 0.5]); }
-    else if (b.gy < 4){ pts.push([b.gx, RA]); pts.push([b.gx, b.gy - 0.5]); }
-    else { pts.push([SP, RA]); pts.push([SP, RB]); pts.push([b.gx, RB]); pts.push([b.gx, b.gy - 0.5]); }
-    return pts.map(function(p){ return P(p[0], p[1]); });
-  }
-  var cars = [], raf = 0, last = 0;
-  function spawn(b){
-    var path = routeTo(b), segs = [], total = 0;
-    for (var i = 1; i < path.length; i++){ var d = Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y); segs.push(d); total += d; }
-    var g = el('g'); g.appendChild(el('ellipse', {rx: 7, ry: 3.5, fill: '#1a1405', opacity: .5, cy: 2})); g.appendChild(el('rect', {x: -7, y: -5, width: 14, height: 7, rx: 2, fill: '#E6C96A'})); g.appendChild(el('rect', {x: -3, y: -8, width: 7, height: 4, rx: 1, fill: '#F3EEE2'}));
-    VL.appendChild(g); cars.push({g: g, path: path, segs: segs, total: total, d: 0, b: b, speed: 85});
-    if (!raf && !RM) raf = requestAnimationFrame(frame);
-    if (RM){ arrive({g: g, b: b}); }
-  }
-  function arrive(car){ VL.removeChild(car.g); var r = car.b.ring; r.setAttribute('opacity', 1); r.setAttribute('rx', TW * car.b.s * .9); r.setAttribute('ry', TH * car.b.s * .9); var k = 0; var t = setInterval(function(){ k += 1; r.setAttribute('opacity', Math.max(0, 1 - k / 18)); r.setAttribute('rx', TW * car.b.s * (.9 + k * .03)); r.setAttribute('ry', TH * car.b.s * (.9 + k * .03)); if (k >= 18) clearInterval(t); }, 30); }
-  function frame(ts){
-    if (!last) last = ts; var dt = Math.min(0.05, (ts - last) / 1000); last = ts;
-    for (var i = cars.length - 1; i >= 0; i--){ var c = cars[i]; c.d += c.speed * dt; if (c.d >= c.total){ arrive(c); cars.splice(i, 1); continue; } var rem = c.d, k = 0; while (k < c.segs.length && rem > c.segs[k]){ rem -= c.segs[k]; k++; } var a = c.path[k], b = c.path[k + 1], f = rem / c.segs[k]; c.g.setAttribute('transform', 'translate(' + (a.x + (b.x - a.x) * f).toFixed(1) + ',' + (a.y + (b.y - a.y) * f).toFixed(1) + ')'); }
-    if (cars.length) raf = requestAnimationFrame(frame); else { raf = 0; last = 0; }
-  }
-  var EVENTS = [ ['A referral lead replied on WhatsApp', 'connect'], ['A proposal was opened by a prospect', 'win'], ['An invoice was paid, receipt sent', 'collect'], ['A client logged a change request', 'build'], ['A reel went out, metrics logged', 'attract'], ['Monthly client health check done', 'care'], ['A renewal conversation was scheduled', 'grow'], ['Bank statement reconciled', 'books'], ['A new skill version passed its tests', 'lab'], ['Server health check passed', 'engine'], ['A draft is waiting for approval', 'command'], ['A hiring note was added', 'team'] ];
-  var feed = document.getElementById('feed'), timer = 0, ei = 0;
-  function pushEvent(){
-    var e = EVENTS[ei % EVENTS.length]; ei++;
-    var li = document.createElement('li'); var now = new Date(); var hh = String(now.getHours()).padStart(2, '0'), mm = String(now.getMinutes()).padStart(2, '0');
-    li.innerHTML = '<span>' + e[0] + '</span><b>' + hh + ':' + mm + ' to ' + byId[e[1]].n + '</b>';
-    feed.insertBefore(li, feed.firstChild); while (feed.children.length > 7) feed.removeChild(feed.lastChild);
-    spawn(byId[e[1]]);
-  }
-  hooks[13] = { enter: function(){ feed.innerHTML = ''; ei = 0; pushEvent(); clearInterval(timer); timer = setInterval(pushEvent, RM ? 4000 : 2600); }, leave: function(){ clearInterval(timer); cars.forEach(function(c){ try { VL.removeChild(c.g); } catch(x){} }); cars = []; cancelAnimationFrame(raf); raf = 0; last = 0; } };
-})();
-
-/* ---------- resize: re-fit the active canvas ---------- */
 var rt = 0; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ if (hooks[cur] && hooks[cur].enter){ if (hooks[cur].leave) hooks[cur].leave(); hooks[cur].enter(); } }, 200); });
-
-/* ---------- start ---------- */
 var h = parseInt((location.hash || '').replace('#', ''), 10);
 go(isNaN(h) ? 0 : Math.max(0, Math.min(slides.length - 1, h - 1)), 1, false);
 })();
